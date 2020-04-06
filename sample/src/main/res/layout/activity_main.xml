@@ -5,9 +5,9 @@
 
         <variable
             name="viewModel"
-            type="com.dohun.kindamvi.MainViewModel" />
+            type="com.dohun.kindamvi.main.MainViewModel" />
 
-        <import type="com.dohun.kindamvi.MainEvent" />
+        <import type="com.dohun.kindamvi.main.MainEvent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".main.MainActivity">
 
         <TextView
             android:id="@+id/tv_count"

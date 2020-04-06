@@ -1,8 +1,11 @@
-package com.dohun.kindamvi
+package com.dohun.kindamvi.main
 
 import com.dohun.kinda.android.KindaViewModel
 import com.dohun.kinda.core.KindaStateMachine
 import com.dohun.kinda.core.buildStateMachine
+import com.dohun.kindamvi.main.MainEvent
+import com.dohun.kindamvi.main.MainSideEffect
+import com.dohun.kindamvi.main.MainState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext

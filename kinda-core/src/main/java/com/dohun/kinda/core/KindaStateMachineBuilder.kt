@@ -10,10 +10,10 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
         mutableMapOf<KindaKey<SIDE_EFFECT, SIDE_EFFECT>, suspend (KindaOutput.Valid<STATE, EVENT, SIDE_EFFECT>) -> Any?>()
 
     inline fun <reified E : EVENT> whenEvent(
-        noinline next: STATE.(EVENT) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>
+        noinline next: STATE.(E) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>
     ) {
         nexts[KindaKey<EVENT, E>(E::class.java)] = { state, event ->
-            next(state, event)
+            next(state, event as E)
         }
     }
 
@@ -26,6 +26,10 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
 
     fun STATE.next(state: STATE, sideEffect: SIDE_EFFECT? = null) = KindaStateMachine.Next(
         state, sideEffect
+    )
+
+    fun STATE.dispatch(sideEffect: SIDE_EFFECT) = KindaStateMachine.Next(
+        this, sideEffect
     )
 
     fun build() =

@@ -1,4 +1,4 @@
-package com.dohun.kindamvi
+package com.dohun.kindamvi.main
 
 import com.dohun.kinda.core.KindaSideEffect
 
