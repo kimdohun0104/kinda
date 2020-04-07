@@ -30,7 +30,7 @@ class MainViewModel : KindaViewModel<MainState, MainEvent, MainSideEffect>() {
                 next(copy(), MainSideEffect.Nothing)
             }
 
-            whenIoTask<MainSideEffect.Nothing> {
+            whenSideEffect<MainSideEffect.Nothing> {
                 withContext(Dispatchers.IO) {
                     delay(1000)
                     MainEvent.Increase1000

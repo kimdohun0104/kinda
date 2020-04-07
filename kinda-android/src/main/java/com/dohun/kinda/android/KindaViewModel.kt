@@ -21,6 +21,7 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
     }
 
     fun intent(event: KindaEvent) {
+        KindaLogger.log(event)
         model(event as E)
     }
 
@@ -35,6 +36,7 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
             is KindaOutput.Valid -> {
                 state = output.next
                 view(state)
+                KindaLogger.log(output.from, output.next)
                 when (output.sideEffect) {
                     null -> return
                     else -> handleSideEffect(output)
@@ -45,9 +47,10 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
     }
 
     private fun handleSideEffect(output: KindaOutput.Valid<S, E, SE>) {
-        stateMachine.ioTaskOrNull(output.sideEffect)?.let { ioTask ->
+        stateMachine.suspendOrNull(output.sideEffect)?.let { suspendFunction ->
             viewModelScope.launch {
-                handleResult(ioTask(output))
+                KindaLogger.log(output.sideEffect!!)
+                handleResult(suspendFunction(output))
             }
         }
     }

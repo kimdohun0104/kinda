@@ -1,6 +1,5 @@
 package com.dohun.kindamvi.login
 
-import android.util.Log
 import com.dohun.kinda.android.KindaViewModel
 import com.dohun.kinda.core.KindaStateMachine
 import com.dohun.kinda.core.buildStateMachine
@@ -17,34 +16,26 @@ class LoginViewModel(
                 next(copy(isLoggingIn = true), LoginSideEffect.Login)
             }
 
-            whenEvent<LoginEvent.EmailInputChanged> {
-                next(
-                    copy(
-                        email = it.email,
-                        isLoginEnable = checkInputValidation(it.email, password)
-                    )
-                )
+            whenEvent<LoginEvent.EmailInputChanged> { event ->
+                next(copy(email = event.email, isLoginEnable = checkInputValidation(event.email, password)))
             }
 
-            whenEvent<LoginEvent.PasswordInputChanged> {
-                next(
-                    copy(
-                        password = it.password,
-                        isLoginEnable = checkInputValidation(email, password)
-                    )
-                )
+            whenEvent<LoginEvent.PasswordInputChanged> { event ->
+                next(copy(password = event.password, isLoginEnable = checkInputValidation(email, event.password)))
             }
 
             whenEvent<LoginEvent.NavigateToMain> {
                 dispatch(LoginSideEffect.NavigateToMain)
             }
 
-            whenIoTask<LoginSideEffect.Login> {
+            whenSideEffect<LoginSideEffect.Login> {
                 login()
             }
 
-            whenIoTask<LoginSideEffect.NavigateToMain> {
-                navigateToMain()
+            whenSideEffect<LoginSideEffect.NavigateToMain> {
+                withContext(Dispatchers.Main) {
+                    loginNavigator.navigateToMain()
+                }
             }
         }
 
@@ -54,9 +45,5 @@ class LoginViewModel(
     private suspend fun login() = withContext(Dispatchers.IO) {
         delay(2000)
         LoginEvent.NavigateToMain
-    }
-
-    private suspend fun navigateToMain() = withContext(Dispatchers.Main) {
-        loginNavigator.navigateToMain()
     }
 }
