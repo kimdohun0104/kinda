@@ -20,13 +20,9 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
         _currentState.value = state
     }
 
-    fun intent(event: KindaEvent) {
+    fun intent(event: E) {
         KindaLogger.log(event)
-        model(event as E)
-    }
-
-    private fun model(event: E): KindaOutput<S, E, SE> {
-        return stateMachine.reduce(state, event).also {
+        stateMachine.reduce(state, event).also {
             handleOutput(it)
         }
     }
@@ -34,9 +30,9 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
     private fun handleOutput(output: KindaOutput<S, E, SE>) {
         when (output) {
             is KindaOutput.Valid -> {
+                KindaLogger.log(output.from, output.next)
                 state = output.next
                 view(state)
-                KindaLogger.log(output.from, output.next)
                 when (output.sideEffect) {
                     null -> return
                     else -> handleSideEffect(output)
