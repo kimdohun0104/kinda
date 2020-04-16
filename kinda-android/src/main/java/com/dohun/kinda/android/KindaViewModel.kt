@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.dohun.kinda.core.*
 import kotlinx.coroutines.launch
 
-abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect> : ViewModel() {
+abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : Any?> : ViewModel() {
 
     abstract val stateMachine: KindaStateMachine<S, E, SE>
 
@@ -15,6 +15,9 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
 
     private val _currentState = MutableLiveData<S>()
     val currentState: LiveData<S> = _currentState
+
+    private val _viewEffect = SingleLiveEvent<VE>()
+    val viewEffect: SingleLiveEvent<VE> = _viewEffect
 
     init {
         _currentState.value = state
@@ -25,6 +28,10 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
         stateMachine.reduce(state, event).also {
             handleOutput(it)
         }
+    }
+
+    fun viewEffect(viewEffect: VE) {
+        _viewEffect.value = viewEffect
     }
 
     private fun handleOutput(output: KindaOutput<S, E, SE>) {

@@ -17,7 +17,10 @@ import com.dohun.kindamvi.databinding.ActivityLoginBinding
 import com.dohun.kindamvi.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, ActivityLoginBinding>(), LoginNavigator {
+class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, LoginViewEffect, ActivityLoginBinding>() {
+
+    override val viewModel: LoginViewModel = LoginViewModel()
+    override val layoutResourceId: Int = R.layout.activity_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +35,12 @@ class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, Act
         }
     }
 
-    override val viewModel: LoginViewModel = LoginViewModel(this)
-    override val layoutResourceId: Int = R.layout.activity_login
-
-    override fun onStateChanged(state: LoginState) {
+    override fun onViewEffect(viewEffect: LoginViewEffect) {
+        when (viewEffect) {
+            is LoginViewEffect.NavigateToMain -> startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
-    override fun navigateToMain() =
-        startActivity(Intent(this, MainActivity::class.java))
 
     private fun EditText.onTextChanged(onChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {

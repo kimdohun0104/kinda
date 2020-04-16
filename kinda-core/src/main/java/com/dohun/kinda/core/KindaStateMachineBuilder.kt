@@ -12,7 +12,7 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
     inline fun <reified E : EVENT> whenEvent(
         noinline next: STATE.(E) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>
     ) {
-        nexts[KindaKey(E::class.java)] = { state, event ->
+        nexts[KindaKey(E::class.java) as KindaKey<EVENT, EVENT>] = { state, event ->
             next(state, event as E)
         }
     }
@@ -20,7 +20,7 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
     inline fun <reified SE : SIDE_EFFECT> whenSideEffect(
         noinline ioTask: suspend (KindaOutput<STATE, EVENT, SE>) -> Any?
     ) {
-        suspends[KindaKey(SE::class.java)] =
+        suspends[KindaKey(SE::class.java) as KindaKey<SIDE_EFFECT, SIDE_EFFECT>] =
             ioTask as suspend (KindaOutput.Valid<STATE, EVENT, SIDE_EFFECT>) -> Any?
     }
 
@@ -30,6 +30,10 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
 
     fun STATE.dispatch(sideEffect: SIDE_EFFECT) = KindaStateMachine.Next(
         this, sideEffect
+    )
+
+    fun STATE.noChange() = KindaStateMachine.Next(
+        this, null as SIDE_EFFECT?
     )
 
     fun build() =

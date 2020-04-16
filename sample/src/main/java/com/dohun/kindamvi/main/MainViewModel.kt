@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class MainViewModel : KindaViewModel<MainState, MainEvent, MainSideEffect>() {
+class MainViewModel : KindaViewModel<MainState, MainEvent, MainSideEffect, Unit>() {
 
     override val stateMachine: KindaStateMachine<MainState, MainEvent, MainSideEffect>
         get() = buildStateMachine(MainState(count = 0)) {
@@ -27,7 +27,7 @@ class MainViewModel : KindaViewModel<MainState, MainEvent, MainSideEffect>() {
             }
 
             whenEvent<MainEvent.OnClickIncrease1000> {
-                next(copy(), MainSideEffect.Nothing)
+                dispatch(MainSideEffect.Nothing)
             }
 
             whenSideEffect<MainSideEffect.Nothing> {

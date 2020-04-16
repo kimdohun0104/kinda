@@ -9,12 +9,17 @@ import com.dohun.kinda.core.KindaEvent
 import com.dohun.kinda.core.KindaSideEffect
 import com.dohun.kinda.core.KindaState
 
-abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VIEW : ViewDataBinding> :
+abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE, VIEW : ViewDataBinding> :
     AppCompatActivity() {
 
     abstract val layoutResourceId: Int
-    abstract val viewModel: KindaViewModel<S, E, SE>
-    abstract fun onStateChanged(state: S)
+    abstract val viewModel: KindaViewModel<S, E, SE, VE>
+
+    open fun onStateChanged(state: S) {
+    }
+
+    open fun onViewEffect(viewEffect: VE) {
+    }
 
     lateinit var binding: VIEW
 
@@ -25,6 +30,10 @@ abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffec
 
         viewModel.currentState.observe(this, Observer {
             onStateChanged(it)
+        })
+
+        viewModel.viewEffect.observe(this, Observer {
+            it?.let { onViewEffect(it) }
         })
     }
 }

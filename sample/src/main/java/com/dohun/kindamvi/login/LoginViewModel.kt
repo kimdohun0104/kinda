@@ -7,9 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class LoginViewModel(
-    private val loginNavigator: LoginNavigator
-) : KindaViewModel<LoginState, LoginEvent, LoginSideEffect>() {
+class LoginViewModel : KindaViewModel<LoginState, LoginEvent, LoginSideEffect, LoginViewEffect>() {
+
     override val stateMachine: KindaStateMachine<LoginState, LoginEvent, LoginSideEffect>
         get() = buildStateMachine(LoginState()) {
             whenEvent<LoginEvent.AttemptLogin> {
@@ -25,25 +24,18 @@ class LoginViewModel(
             }
 
             whenEvent<LoginEvent.NavigateToMain> {
-                dispatch(LoginSideEffect.NavigateToMain)
+                viewEffect(LoginViewEffect.NavigateToMain)
+                noChange()
             }
 
             whenSideEffect<LoginSideEffect.Login> {
-                login()
-            }
-
-            whenSideEffect<LoginSideEffect.NavigateToMain> {
-                withContext(Dispatchers.Main) {
-                    loginNavigator.navigateToMain()
+                withContext(Dispatchers.IO) {
+                    delay(2000)
+                    LoginEvent.NavigateToMain
                 }
             }
         }
 
     private fun checkInputValidation(email: String, password: String) =
         email.length > 4 && password.length > 4
-
-    private suspend fun login() = withContext(Dispatchers.IO) {
-        delay(2000)
-        LoginEvent.NavigateToMain
-    }
 }
