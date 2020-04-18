@@ -14,7 +14,7 @@ To learn about MVI, I recommend these articles or videos.
 
 [Mobius: A Loopy UI Architecture - Ahmed Nawara, Spotify](https://www.facebook.com/watch/?v=2025571921049235)  
 
-If you want to use Kinda Framework perfectly, please check out this [glideline](https://github.com/kimdohun0104/KindaMVI/edit/master/GUIDELINE.md)
+If you want to use Kinda Framework perfectly, please check out this [glideline](https://github.com/kimdohun0104/KindaMVI/blob/master/GUIDELINE.md)
 
 <br>
 
