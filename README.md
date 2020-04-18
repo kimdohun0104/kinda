@@ -134,6 +134,18 @@ class MainActivity : KindaActivity<MainState, MainEvent, MainSideEffect, MainVie
 }
 ```
 
+---
+### Logging
+Kinda support logging for better debugging. Search **Kinda** in Logcat, then you might noticed every events and side effects left log. Like this:
+```
+Side Effect [com.dohun.kindamvi.main.MainSideEffect$DelayForIncrease@fc48aa1]
+Event [com.dohun.kindamvi.main.MainEvent$Increase1000@baa5898]
+    From  [MainState(count=0)]
+    Next  [MainState(count=1000)]
+```
+You can check if the expected value is returned from a specific event.  
+If you want to disable logging. Just call `KindaLogger.setIsLogEnable(false)`
+
 <br>
 
 ### License
