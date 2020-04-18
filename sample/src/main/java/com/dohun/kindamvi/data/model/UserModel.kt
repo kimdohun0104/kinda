@@ -1,4 +1,4 @@
-package com.dohun.kindamvi.github
+package com.dohun.kindamvi.data.model
 
 import androidx.recyclerview.widget.DiffUtil
 

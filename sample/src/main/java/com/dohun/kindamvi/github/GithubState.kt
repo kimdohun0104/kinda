@@ -4,6 +4,7 @@ import com.dohun.kinda.core.KindaEvent
 import com.dohun.kinda.core.KindaSideEffect
 import com.dohun.kinda.core.KindaState
 import com.dohun.kinda.core.KindaViewEffect
+import com.dohun.kindamvi.data.model.UserModel
 
 data class GithubState(
     val isLoading: Boolean = false,

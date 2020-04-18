@@ -3,11 +3,16 @@ package com.dohun.kindamvi.github
 import com.dohun.kinda.android.KindaViewModel
 import com.dohun.kinda.core.KindaStateMachine
 import com.dohun.kinda.core.buildStateMachine
+import com.dohun.kindamvi.data.GithubApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class GithubViewModel(private val githubApi: GithubApi) :
     KindaViewModel<GithubState, GithubEvent, GithubSideEffect, GithubViewEffect>() {
+
+    init {
+        intent(GithubEvent.AttemptUserLoad)
+    }
 
     override val stateMachine: KindaStateMachine<GithubState, GithubEvent, GithubSideEffect>
         get() = buildStateMachine(GithubState()) {

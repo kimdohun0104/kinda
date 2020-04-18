@@ -1,12 +1,15 @@
-package com.dohun.kindamvi.github
+package com.dohun.kindamvi.github.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.dohun.kindamvi.data.model.UserModel
 import com.dohun.kindamvi.databinding.ItemUserBinding
 
-class UserListAdapter : ListAdapter<UserModel, UserListAdapter.UserViewHolder>(UserModel.DIFF_CALLBACK) {
+class UserListAdapter : ListAdapter<UserModel, UserListAdapter.UserViewHolder>(
+    UserModel.DIFF_CALLBACK
+) {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {

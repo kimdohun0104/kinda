@@ -1,5 +1,6 @@
-package com.dohun.kindamvi.github
+package com.dohun.kindamvi.data
 
+import com.dohun.kindamvi.data.model.UserModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
