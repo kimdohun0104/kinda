@@ -2,7 +2,7 @@
 
 Kind of Android MVI framework  
 
-:exclamation: `Kinda is very ealry version.Some of concepts are likely to change.`​
+:exclamation: `Kinda is very ealry version.Some of the concepts are likely to change.`​
 
 Do you have problems with handling state of your application? Do you want to handle events easier? You've come to right place. Let me introduce about most fabulous framework in history.  
 
@@ -13,6 +13,8 @@ To learn about MVI, I recommend these articles or videos.
 [Translated to Korean](https://medium.com/@dikolight203/%EB%B2%88%EC%97%AD-mvi-mv-%ED%98%95%EC%A0%9C%EC%9D%98-%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%A9%A4%EB%B2%84-46312e338802)  
 
 [Mobius: A Loopy UI Architecture - Ahmed Nawara, Spotify](https://www.facebook.com/watch/?v=2025571921049235)  
+
+If you want to use Kinda Framework perfectly, please check out this [glideline](https://github.com/kimdohun0104/KindaMVI/edit/master/GUIDELINE.md)
 
 <br>
 
@@ -95,7 +97,7 @@ buildStateMachine(initialState = MainState()) {
 
 When you dispatch or pass **SideEffect**. The suspend function inside of `whenSideEffect` will execute. Unfortunately, Kinda only support coroutine suspend function. 
 
-There's no plan for supporting RxJava. But I'm considering about Coroutine Flow.
+There's no plan for supporting RxJava. But I'm considering Coroutine Flow.
 
 <br>
 
@@ -103,13 +105,13 @@ There's no plan for supporting RxJava. But I'm considering about Coroutine Flow.
 
 In Android development, there's tons of single view events like toast, snackbar, navigating, etc. In MVI architecture, this is very complex situation. There's no best practice about single event so it can be a state, side effect or something else. 
 
-So I decided to make new concept called ViewEffect. It's basically **SingleLiveEvent**. You can just call `viewEffect()` to single event. But it's not a dramatic solution, just temporary. ViewEffect can be replace anytime.
+So I decided to make new concept called ViewEffect. It's basically **SingleLiveEvent**. You can just call `viewEffect()` to single event. But it's not a dramatic solution, just temporary. ViewEffect can be replaced anytime.
 
 ---
 
 ### Using Kinda Activity/Fragment
 
-Using Kinda Activity/Fragment helps you to avoid boilerplates. Check out the sample code.
+Using Kinda Activity/Fragment helps you to avoid boilerplate. Check out the sample code.
 
 ```kotlin
 class MainActivity : KindaActivity<MainState, MainEvent, MainSideEffect, MainViewEffect, ActivityMainBinding>() {
