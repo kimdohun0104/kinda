@@ -1,7 +1,6 @@
 package com.dohun.kindamvi.github
 
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 
 @BindingAdapter("users")

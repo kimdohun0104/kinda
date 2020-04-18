@@ -7,7 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.dohun.kinda.core.*
 import kotlinx.coroutines.launch
 
-abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : Any?> : ViewModel() {
+abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect> :
+    ViewModel() {
 
     abstract val stateMachine: KindaStateMachine<S, E, SE>
 
@@ -58,6 +59,7 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun handleResult(result: Any?) {
         when (result) {
             is KindaState -> {

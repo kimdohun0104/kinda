@@ -1,12 +1,9 @@
 package com.dohun.kinda.android
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -14,8 +11,9 @@ import androidx.lifecycle.Observer
 import com.dohun.kinda.core.KindaEvent
 import com.dohun.kinda.core.KindaSideEffect
 import com.dohun.kinda.core.KindaState
+import com.dohun.kinda.core.KindaViewEffect
 
-abstract class KindaFragment<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE, VIEW : ViewDataBinding> :
+abstract class KindaFragment<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect, VIEW : ViewDataBinding> :
     Fragment() {
 
     abstract val layoutResourceId: Int

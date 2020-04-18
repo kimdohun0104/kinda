@@ -1,9 +1,6 @@
 package com.dohun.kindamvi.github
 
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.map
 import com.dohun.kinda.android.KindaViewModel
-import com.dohun.kinda.core.KindaEvent
 import com.dohun.kinda.core.KindaStateMachine
 import com.dohun.kinda.core.buildStateMachine
 import kotlinx.coroutines.Dispatchers
@@ -24,14 +21,10 @@ class GithubViewModel(private val githubApi: GithubApi) :
             }
 
             whenEvent<GithubEvent.AttemptUserLoad> {
-                next(copy(isLoading = true), GithubSideEffect.AttemptGetUsers)
+                next(copy(isLoading = true), GithubSideEffect.GetUsers)
             }
 
-            whenEvent<GithubEvent.TestEvent> {
-                next(copy())
-            }
-
-            whenSideEffect<GithubSideEffect.AttemptGetUsers> {
+            whenSideEffect<GithubSideEffect.GetUsers> {
                 withContext(Dispatchers.IO) {
                     try {
                         GithubEvent.UserLoaded(githubApi.getUsers())

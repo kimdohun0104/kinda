@@ -1,12 +1,9 @@
 package com.dohun.kindamvi.github
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dohun.kinda.android.KindaActivity
-import com.dohun.kinda.android.KindaViewModel
 import com.dohun.kindamvi.R
 import com.dohun.kindamvi.databinding.ActivityGithubBinding
 import com.google.android.material.snackbar.Snackbar
@@ -19,14 +16,12 @@ class GithubActivity :
 
     override val viewModel: GithubViewModel = GithubViewModel(GithubApi.getGithubApi())
 
-    private val adapter: UserListAdapter by lazy { UserListAdapter() }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         viewModel.intent(GithubEvent.AttemptUserLoad)
 
-        rv_user.adapter = adapter
+        rv_user.adapter = UserListAdapter()
         rv_user.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
     }
 

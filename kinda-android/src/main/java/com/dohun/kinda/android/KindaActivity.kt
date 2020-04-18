@@ -8,8 +8,9 @@ import androidx.lifecycle.Observer
 import com.dohun.kinda.core.KindaEvent
 import com.dohun.kinda.core.KindaSideEffect
 import com.dohun.kinda.core.KindaState
+import com.dohun.kinda.core.KindaViewEffect
 
-abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE, VIEW : ViewDataBinding> :
+abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect, VIEW : ViewDataBinding> :
     AppCompatActivity() {
 
     abstract val layoutResourceId: Int

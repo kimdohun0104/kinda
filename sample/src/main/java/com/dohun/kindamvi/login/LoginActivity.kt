@@ -1,21 +1,14 @@
 package com.dohun.kindamvi.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelStore
 import com.dohun.kinda.android.KindaActivity
-import com.dohun.kinda.android.KindaViewModel
 import com.dohun.kindamvi.R
 import com.dohun.kindamvi.databinding.ActivityLoginBinding
 import com.dohun.kindamvi.main.MainActivity
-import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, LoginViewEffect, ActivityLoginBinding>() {
 
@@ -26,21 +19,22 @@ class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, Log
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
 
-        binding.etEmail.onTextChanged {
-            viewModel.intent(LoginEvent.EmailInputChanged(it))
-        }
-
-        binding.etPassword.onTextChanged {
-            viewModel.intent(LoginEvent.PasswordInputChanged(it))
-        }
+        setupOnTextChanged()
     }
 
     override fun onViewEffect(viewEffect: LoginViewEffect) {
         when (viewEffect) {
-            is LoginViewEffect.NavigateToMain -> startActivity(Intent(this, MainActivity::class.java))
+            is LoginViewEffect.NavigateToMain -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }
     }
 
+    private fun setupOnTextChanged() {
+        binding.etEmail.onTextChanged { viewModel.intent(LoginEvent.EmailInputChanged(it)) }
+        binding.etPassword.onTextChanged { viewModel.intent(LoginEvent.PasswordInputChanged(it)) }
+    }
 
     private fun EditText.onTextChanged(onChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
