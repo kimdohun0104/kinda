@@ -12,9 +12,13 @@ To learn about MVI, I recommend these articles or videos.
 [MVI — another member of the MV* band](https://proandroiddev.com/mvi-a-new-member-of-the-mv-band-6f7f0d23bc8a)  
 [Translated to Korean](https://medium.com/@dikolight203/%EB%B2%88%EC%97%AD-mvi-mv-%ED%98%95%EC%A0%9C%EC%9D%98-%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%A9%A4%EB%B2%84-46312e338802)  
 
+[MVI 패턴에 대한 고찰, 이유와 방법 그리고 한계](https://medium.com/@dikolight203/mvi-%ED%8C%A8%ED%84%B4%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0-%EC%9D%B4%EC%9C%A0%EC%99%80-%EB%B0%A9%EB%B2%95-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%ED%95%9C%EA%B3%84-767cc9973c98)  
+
 [Mobius: A Loopy UI Architecture - Ahmed Nawara, Spotify](https://www.facebook.com/watch/?v=2025571921049235)  
 
 If you want to use Kinda Framework perfectly, please check out this [glideline](https://github.com/kimdohun0104/KindaMVI/blob/master/GUIDELINE.md)
+
+To solve common problem, check out this [common problem solution](https://github.com/kimdohun0104/KindaMVI/blob/master/COMMON_PLOBLEM.md)
 
 <br>
 
@@ -133,6 +137,18 @@ class MainActivity : KindaActivity<MainState, MainEvent, MainSideEffect, MainVie
     }
 }
 ```
+
+---
+### Logging
+Kinda support logging for better debugging. Search **Kinda** in Logcat, then you might noticed every events and side effects left log. Like this:
+```
+Side Effect [com.dohun.kindamvi.main.MainSideEffect$DelayForIncrease@fc48aa1]
+Event [com.dohun.kindamvi.main.MainEvent$Increase1000@baa5898]
+    From  [MainState(count=0)]
+    Next  [MainState(count=1000)]
+```
+You can check if the expected value is returned from a specific event.  
+If you want to disable logging. Just call `KindaLogger.setIsLogEnable(false)`
 
 <br>
 
