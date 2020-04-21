@@ -21,6 +21,6 @@ class MainActivity : KindaActivity<MainState, MainEvent, MainSideEffect, MainVie
     }
 
     private fun setupNavigate() {
-        btn_github.setOnClickListener { startActivity(Intent(this, GithubActivity::class.java)) }
+        iv_person.setOnClickListener { startActivity(Intent(this, GithubActivity::class.java)) }
     }
 }

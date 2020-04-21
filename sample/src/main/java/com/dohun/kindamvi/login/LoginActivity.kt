@@ -9,6 +9,7 @@ import com.dohun.kinda.android.KindaActivity
 import com.dohun.kindamvi.R
 import com.dohun.kindamvi.databinding.ActivityLoginBinding
 import com.dohun.kindamvi.main.MainActivity
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, LoginViewEffect, ActivityLoginBinding>() {
 
@@ -20,6 +21,20 @@ class LoginActivity : KindaActivity<LoginState, LoginEvent, LoginSideEffect, Log
         binding.viewModel = viewModel
 
         setupOnTextChanged()
+    }
+
+    override fun onStateChanged(state: LoginState) {
+        if (state.email.isNotEmpty() && state.email.length < 5) {
+            til_email.error = getString(R.string.error_short_email)
+        } else {
+            til_email.error = null
+        }
+
+        if (state.password.isNotEmpty() && state.password.length < 5) {
+            til_password.error = getString(R.string.error_short_password)
+        } else {
+            til_password.error = null
+        }
     }
 
     override fun onViewEffect(viewEffect: LoginViewEffect) {

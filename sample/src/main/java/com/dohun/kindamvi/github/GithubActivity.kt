@@ -22,6 +22,7 @@ class GithubActivity :
         binding.viewModel = viewModel
 
         setupRecyclerView()
+        setupNavigate()
     }
 
     override fun onViewEffect(viewEffect: GithubViewEffect) {
@@ -34,5 +35,9 @@ class GithubActivity :
     private fun setupRecyclerView() {
         rv_user.adapter = UserListAdapter()
         rv_user.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+    }
+
+    private fun setupNavigate() {
+        tb_github.setNavigationOnClickListener { finish() }
     }
 }
