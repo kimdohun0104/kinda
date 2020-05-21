@@ -1,36 +1,19 @@
+import dependencies.Deps
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android {
-    compileSdkVersion 29
-
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    dataBinding {
-        enabled = true
-    }
-}
+apply from: rootProject.file('gradle/framework.gradle')
+android.dataBinding.enabled = true
 
 dependencies {
     implementation project(path: ':kinda-core')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    implementation Deps.Kotlin.kotlin
+
+    implementation Deps.AndroidX.appCompat
+
+    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 }
