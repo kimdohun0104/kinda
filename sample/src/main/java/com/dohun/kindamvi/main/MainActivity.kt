@@ -2,7 +2,7 @@ package com.dohun.kindamvi.main
 
 import android.content.Intent
 import android.os.Bundle
-import com.dohun.kinda.android.KindaActivity
+import com.dohun.kinda.android.ui.KindaActivity
 import com.dohun.kindamvi.R
 import com.dohun.kindamvi.databinding.ActivityMainBinding
 import com.dohun.kindamvi.github.GithubActivity

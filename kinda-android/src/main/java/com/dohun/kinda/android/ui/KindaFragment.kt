@@ -1,4 +1,4 @@
-package com.dohun.kinda.android
+package com.dohun.kinda.android.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.dohun.kinda.core.KindaEvent
-import com.dohun.kinda.core.KindaSideEffect
-import com.dohun.kinda.core.KindaState
-import com.dohun.kinda.core.KindaViewEffect
+import com.dohun.kinda.android.KindaViewModel
+import com.dohun.kinda.core.concept.KindaEvent
+import com.dohun.kinda.core.concept.KindaSideEffect
+import com.dohun.kinda.core.concept.KindaState
+import com.dohun.kinda.core.concept.KindaViewEffect
 
 abstract class KindaFragment<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect, VIEW : ViewDataBinding> :
     Fragment() {

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import com.dohun.kinda.android.KindaActivity
+import com.dohun.kinda.android.ui.KindaActivity
 import com.dohun.kindamvi.R
 import com.dohun.kindamvi.databinding.ActivityLoginBinding
 import com.dohun.kindamvi.main.MainActivity

@@ -3,7 +3,7 @@ package com.dohun.kindamvi.github
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dohun.kinda.android.KindaActivity
+import com.dohun.kinda.android.ui.KindaActivity
 import com.dohun.kindamvi.R
 import com.dohun.kindamvi.data.GithubApi
 import com.dohun.kindamvi.databinding.ActivityGithubBinding

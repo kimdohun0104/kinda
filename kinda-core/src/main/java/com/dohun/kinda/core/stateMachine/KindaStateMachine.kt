@@ -1,9 +1,15 @@
-package com.dohun.kinda.core
+package com.dohun.kinda.core.stateMachine
+
+import com.dohun.kinda.core.KindaMatcher
+import com.dohun.kinda.core.KindaOutput
+import com.dohun.kinda.core.concept.KindaEvent
+import com.dohun.kinda.core.concept.KindaSideEffect
+import com.dohun.kinda.core.concept.KindaState
 
 class KindaStateMachine<S : KindaState, E : KindaEvent, SE : KindaSideEffect> internal constructor(
     val initialState: S,
-    private val nexts: MutableMap<KindaKey<E, E>, (S, E) -> Next<S, SE>>,
-    private val suspends: MutableMap<KindaKey<SE, SE>, suspend (KindaOutput.Valid<S, E, SE>) -> Any?>
+    private val nexts: MutableMap<KindaMatcher<E, E>, (S, E) -> Next<S, SE>>,
+    private val suspends: MutableMap<KindaMatcher<SE, SE>, suspend (KindaOutput.Valid<S, E, SE>) -> Any?>
 ) {
 
     fun reduce(state: S, event: E): KindaOutput<S, E, SE> {
@@ -12,7 +18,7 @@ class KindaStateMachine<S : KindaState, E : KindaEvent, SE : KindaSideEffect> in
 
     fun suspendOrNull(sideEffect: SE?): (suspend (KindaOutput.Valid<S, E, SE>) -> Any?)? {
         sideEffect?.let {
-            return suspends.filter { it.key.check(sideEffect) }
+            return suspends.filter { it.key.match(sideEffect) }
                 .map { it.value }
                 .firstOrNull()
         }
@@ -21,7 +27,7 @@ class KindaStateMachine<S : KindaState, E : KindaEvent, SE : KindaSideEffect> in
 
     private fun S.toOutput(event: E): KindaOutput<S, E, SE> {
         nexts.forEach {
-            if (it.key.check(event)) {
+            if (it.key.match(event)) {
                 val (next, sideEffect) = it.value(this, event)
                 return KindaOutput.Valid(this, event, next, sideEffect)
             }

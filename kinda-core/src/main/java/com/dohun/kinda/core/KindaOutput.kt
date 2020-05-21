@@ -1,5 +1,9 @@
 package com.dohun.kinda.core
 
+import com.dohun.kinda.core.concept.KindaEvent
+import com.dohun.kinda.core.concept.KindaSideEffect
+import com.dohun.kinda.core.concept.KindaState
+
 sealed class KindaOutput<out S : KindaState, out E : KindaEvent, out SE : KindaSideEffect> {
     abstract val from: S
     abstract val event: E

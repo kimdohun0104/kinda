@@ -1,8 +1,8 @@
 package com.dohun.kinda.android
 
-import com.dohun.kinda.core.KindaEvent
-import com.dohun.kinda.core.KindaSideEffect
-import com.dohun.kinda.core.KindaState
+import com.dohun.kinda.core.concept.KindaEvent
+import com.dohun.kinda.core.concept.KindaSideEffect
+import com.dohun.kinda.core.concept.KindaState
 
 object KindaLogger {
 

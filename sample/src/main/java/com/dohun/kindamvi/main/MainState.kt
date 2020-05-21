@@ -1,9 +1,9 @@
 package com.dohun.kindamvi.main
 
-import com.dohun.kinda.core.KindaEvent
-import com.dohun.kinda.core.KindaSideEffect
-import com.dohun.kinda.core.KindaState
-import com.dohun.kinda.core.KindaViewEffect
+import com.dohun.kinda.core.concept.KindaEvent
+import com.dohun.kinda.core.concept.KindaSideEffect
+import com.dohun.kinda.core.concept.KindaState
+import com.dohun.kinda.core.concept.KindaViewEffect
 
 data class MainState(
     val count: Int = 0

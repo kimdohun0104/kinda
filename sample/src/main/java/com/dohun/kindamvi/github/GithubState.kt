@@ -1,9 +1,9 @@
 package com.dohun.kindamvi.github
 
-import com.dohun.kinda.core.KindaEvent
-import com.dohun.kinda.core.KindaSideEffect
-import com.dohun.kinda.core.KindaState
-import com.dohun.kinda.core.KindaViewEffect
+import com.dohun.kinda.core.concept.KindaEvent
+import com.dohun.kinda.core.concept.KindaSideEffect
+import com.dohun.kinda.core.concept.KindaState
+import com.dohun.kinda.core.concept.KindaViewEffect
 import com.dohun.kindamvi.data.model.UserModel
 
 data class GithubState(
