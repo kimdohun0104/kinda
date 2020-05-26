@@ -12,5 +12,4 @@ object Versions {
 
     const val versionCode = (100 * majorVersion) + (10 * minorVersion) + patchVersion
     const val versionName = "$majorVersion.$minorVersion.$patchVersion"
-
 }

@@ -8,6 +8,7 @@ object Deps {
     object Gradle {
         const val gradle = "com.android.tools.build:gradle:3.6.3"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
+        const val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
     }
 
     object Kotlin {

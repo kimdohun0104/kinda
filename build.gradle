@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath Deps.Gradle.gradle
         classpath Deps.Gradle.kotlinGradlePlugin
+        classpath Deps.Gradle.androidMavenGradlePlugin
     }
 }
 
