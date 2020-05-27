@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.kimdohun0104'
+group='com.github.kimdohun0104.KindaMVI'
 
 apply from: rootProject.file('gradle/framework.gradle')
 android.dataBinding.enabled = true
