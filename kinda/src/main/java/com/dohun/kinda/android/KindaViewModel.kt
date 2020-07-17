@@ -3,13 +3,15 @@ package com.dohun.kinda.android
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.dohun.kinda.core.KindaOutput
 import com.dohun.kinda.core.KindaStateMachine
 import com.dohun.kinda.core.concept.KindaEvent
 import com.dohun.kinda.core.concept.KindaSideEffect
 import com.dohun.kinda.core.concept.KindaState
 import com.dohun.kinda.core.concept.KindaViewEffect
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect> :
@@ -24,6 +26,9 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
 
     private val _viewEffect = KindaSingleLiveEvent<VE>()
     val viewEffect: KindaSingleLiveEvent<VE> = _viewEffect
+
+    private val viewModelJob = SupervisorJob()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     init {
         _currentState.value = state
@@ -57,7 +62,7 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
 
     private fun handleSideEffect(output: KindaOutput.Valid<S, E, SE>) {
         stateMachine.suspendOrNull(output.sideEffect)?.let { suspendFunction ->
-            viewModelScope.launch {
+            uiScope.launch {
                 KindaLogger.log(output.sideEffect!!)
                 handleResult(suspendFunction(output))
             }

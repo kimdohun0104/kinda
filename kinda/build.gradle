@@ -13,8 +13,8 @@ android.dataBinding.enabled = true
 
 dependencies {
     implementation Deps.Kotlin.kotlin
+    implementation Deps.Kotlin.coroutine
+    implementation Deps.Kotlin.coroutineAndroid
 
     implementation Deps.AndroidX.appCompat
-
-    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 }
