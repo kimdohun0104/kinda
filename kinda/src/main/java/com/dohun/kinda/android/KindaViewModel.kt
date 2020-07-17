@@ -14,8 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect> :
-    ViewModel() {
+abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect> : ViewModel() {
 
     abstract val stateMachine: KindaStateMachine<S, E, SE>
 
@@ -34,15 +33,13 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
         _currentState.value = state
     }
 
-    fun intent(event: E) {
-        KindaLogger.log(event)
-        stateMachine.reduce(state, event).also {
-            handleOutput(it)
-        }
-    }
-
     fun viewEffect(viewEffect: VE) {
         _viewEffect.value = viewEffect
+    }
+
+    fun intent(event: E) {
+        KindaLogger.log(event)
+        handleOutput(stateMachine.reduce(state, event))
     }
 
     private fun handleOutput(output: KindaOutput<S, E, SE>) {
@@ -50,31 +47,31 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
             is KindaOutput.Valid -> {
                 KindaLogger.log(output.from, output.next)
                 state = output.next
-                view(state)
+                renderNewState(state)
                 when (output.sideEffect) {
                     null -> return
-                    else -> handleSideEffect(output)
+                    else -> startSideEffectCycle(output)
                 }
             }
             else -> Unit
         }
     }
 
-    private fun handleSideEffect(output: KindaOutput.Valid<S, E, SE>) {
-        stateMachine.suspendOrNull(output.sideEffect)?.let { suspendFunction ->
+    private fun startSideEffectCycle(output: KindaOutput.Valid<S, E, SE>) {
+        stateMachine.suspendOrNull(output.sideEffect)?.let { sideEffect ->
             uiScope.launch {
                 KindaLogger.log(output.sideEffect!!)
-                handleResult(suspendFunction(output))
+                handleSideEffectCycleResult(sideEffect(output))
             }
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun handleResult(result: Any?) {
+    private fun handleSideEffectCycleResult(result: Any?) {
         when (result) {
             is KindaState -> {
                 state = result as S
-                view(state)
+                renderNewState(state)
             }
             is KindaEvent -> {
                 intent(result as E)
@@ -82,7 +79,12 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
         }
     }
 
-    private fun view(newState: S) {
+    private fun renderNewState(newState: S) {
         _currentState.value = newState
+    }
+
+    override fun onCleared() {
+        viewModelJob.cancel()
+        super.onCleared()
     }
 }

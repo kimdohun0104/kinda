@@ -21,8 +21,4 @@ class KindaSingleLiveEvent<T> : MutableLiveData<T?>() {
         pending.set(true)
         super.setValue(value)
     }
-
-    fun call() {
-        value = null
-    }
 }
