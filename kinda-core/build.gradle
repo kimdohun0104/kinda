@@ -1,10 +1,12 @@
 import dependencies.Deps
+import dependencies.Versions
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.kimdohun0104:kinda-core'
+group='com.github.kimdohun0104.KindaMVI'
+version="$Versions.versionName"
 
 apply from: rootProject.file('gradle/framework.gradle')
 
