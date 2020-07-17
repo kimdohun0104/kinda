@@ -22,6 +22,21 @@ To solve common problem, check out this [common problem solution](https://github
 
 <br>
 
+## Download [![](https://jitpack.io/v/kimdohun0104/KindaMVI.svg)](https://jitpack.io/#kimdohun0104/KindaMVI)
+You can simply use Kidna in your project! 
+```
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+...
+dependencies {
+	implementation 'com.github.kimdohun0104:KindaMVI:(latest-release)'
+}
+```
+
 ## Feature
 
 ### State machine
