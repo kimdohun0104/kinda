@@ -9,7 +9,7 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
 ) {
     val nexts = mutableMapOf<KindaMatcher<EVENT, EVENT>, (STATE, EVENT) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>>()
 
-    val suspends = mutableMapOf<KindaMatcher<SIDE_EFFECT, SIDE_EFFECT>, suspend (KindaOutput.Valid<STATE, EVENT, SIDE_EFFECT>) -> Any?>()
+    val sideEffects = mutableMapOf<KindaMatcher<SIDE_EFFECT, SIDE_EFFECT>, suspend (KindaOutput.Valid<STATE, EVENT, SIDE_EFFECT>) -> Any?>()
 
     inline fun <reified E : EVENT> whenEvent(
         noinline next: STATE.(E) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>
@@ -22,7 +22,7 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
     inline fun <reified SE : SIDE_EFFECT> whenSideEffect(
         noinline ioTask: suspend (KindaOutput<STATE, EVENT, SE>) -> Any?
     ) {
-        suspends[KindaMatcher(SE::class.java) as KindaMatcher<SIDE_EFFECT, SIDE_EFFECT>] =
+        sideEffects[KindaMatcher(SE::class.java) as KindaMatcher<SIDE_EFFECT, SIDE_EFFECT>] =
             ioTask as suspend (KindaOutput.Valid<STATE, EVENT, SIDE_EFFECT>) -> Any?
     }
 
@@ -35,5 +35,5 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
     fun STATE.noChange() =
         KindaStateMachine.Next(this, null as SIDE_EFFECT?)
 
-    fun build() = KindaStateMachine(initialState, nexts, suspends)
+    fun build() = KindaStateMachine(initialState, nexts, sideEffects)
 }
