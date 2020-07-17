@@ -40,8 +40,8 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':kinda-core')
-    implementation project(path: ':kinda-android')
+//    implementation project(path: ':kinda-core')
+//    implementation project(path: ':kinda-android')
 
     implementation Deps.material
     implementation Deps.lifecycleExt
@@ -60,4 +60,5 @@ dependencies {
     implementation Deps.Retrofit.retrofit
     implementation Deps.Retrofit.gson
 
+    implementation 'com.github.kimdohun0104:KindaMVI:0.0.4-alpha01'
 }
