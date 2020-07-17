@@ -1,20 +1,14 @@
-package com.dohun.kinda.core.stateMachine
+package com.dohun.kinda.core
 
-import com.dohun.kinda.core.KindaMatcher
-import com.dohun.kinda.core.KindaOutput
-import com.dohun.kinda.core.concept.KindaEvent
-import com.dohun.kinda.core.concept.KindaSideEffect
-import com.dohun.kinda.core.concept.KindaState
-
-class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFECT : KindaSideEffect>(
+class KindaStateMachineBuilder<STATE : com.dohun.kinda.core.concept.KindaState, EVENT : com.dohun.kinda.core.concept.KindaEvent, SIDE_EFFECT : com.dohun.kinda.core.concept.KindaSideEffect>(
     private val initialState: STATE
 ) {
-    val nexts = mutableMapOf<KindaMatcher<EVENT, EVENT>, (STATE, EVENT) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>>()
+    val nexts = mutableMapOf<KindaMatcher<EVENT, EVENT>, (STATE, EVENT) -> com.dohun.kinda.core.KindaStateMachine.Next<STATE, SIDE_EFFECT>>()
 
     val suspends = mutableMapOf<KindaMatcher<SIDE_EFFECT, SIDE_EFFECT>, suspend (KindaOutput.Valid<STATE, EVENT, SIDE_EFFECT>) -> Any?>()
 
     inline fun <reified E : EVENT> whenEvent(
-        noinline next: STATE.(E) -> KindaStateMachine.Next<STATE, SIDE_EFFECT>
+        noinline next: STATE.(E) -> com.dohun.kinda.core.KindaStateMachine.Next<STATE, SIDE_EFFECT>
     ) {
         nexts[KindaMatcher(E::class.java) as KindaMatcher<EVENT, EVENT>] = { state, event ->
             next(state, event as E)
@@ -29,13 +23,13 @@ class KindaStateMachineBuilder<STATE : KindaState, EVENT : KindaEvent, SIDE_EFFE
     }
 
     fun STATE.next(state: STATE, sideEffect: SIDE_EFFECT? = null) =
-        KindaStateMachine.Next(state, sideEffect)
+        com.dohun.kinda.core.KindaStateMachine.Next(state, sideEffect)
 
     fun STATE.dispatch(sideEffect: SIDE_EFFECT) =
-        KindaStateMachine.Next(this, sideEffect)
+        com.dohun.kinda.core.KindaStateMachine.Next(this, sideEffect)
 
     fun STATE.noChange() =
-        KindaStateMachine.Next(this, null as SIDE_EFFECT?)
+        com.dohun.kinda.core.KindaStateMachine.Next(this, null as SIDE_EFFECT?)
 
-    fun build() = KindaStateMachine(initialState, nexts, suspends)
+    fun build() = com.dohun.kinda.core.KindaStateMachine(initialState, nexts, suspends)
 }

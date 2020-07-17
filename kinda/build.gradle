@@ -1,6 +1,4 @@
 import dependencies.Deps
-import dependencies.Versions
-import groovyjarjarantlr.Version
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
@@ -8,15 +6,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.kimdohun0104.KindaMVI'
-version="$Versions.versionName"
+group='com.github.kimdohun0104'
 
 apply from: rootProject.file('gradle/framework.gradle')
 android.dataBinding.enabled = true
 
 dependencies {
-    implementation project(path: ':kinda-core')
-
     implementation Deps.Kotlin.kotlin
 
     implementation Deps.AndroidX.appCompat

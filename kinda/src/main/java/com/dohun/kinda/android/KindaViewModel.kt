@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dohun.kinda.core.KindaOutput
+import com.dohun.kinda.core.KindaStateMachine
 import com.dohun.kinda.core.concept.KindaEvent
 import com.dohun.kinda.core.concept.KindaSideEffect
 import com.dohun.kinda.core.concept.KindaState
 import com.dohun.kinda.core.concept.KindaViewEffect
-import com.dohun.kinda.core.stateMachine.KindaStateMachine
 import kotlinx.coroutines.launch
 
 abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect, VE : KindaViewEffect> :
