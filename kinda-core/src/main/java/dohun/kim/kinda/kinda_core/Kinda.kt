@@ -1,12 +1,14 @@
 package dohun.kim.kinda.kinda_core
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constructor(
-    initialState: S,
+    val initialState: S,
     private val reducer: KindaReducer<S, E, SE>,
-    private val sideEffectHandler: KindaSideEffectHandler<S, E, SE>,
+    private val sideEffectHandler: KindaSideEffectHandler<S, E, SE>?,
     private val render: (state: S) -> Unit,
     private val coroutineScope: CoroutineScope
 ) {
@@ -21,10 +23,10 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         }
 
         next.sideEffect?.let { sideEffect ->
-            coroutineScope.launch {
-                val result = sideEffectHandler.handle(state, sideEffect)
-
-                intent(result)
+            coroutineScope.launch(Dispatchers.IO) {
+                sideEffectHandler?.handle(state, sideEffect)?.let { sideEffectResult ->
+                    intent(sideEffectResult)
+                }
             }
         }
     }
@@ -54,16 +56,14 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         fun build(): Kinda<S, E, SE> {
             checkNotNull(initialState)
             checkNotNull(reducer)
-            checkNotNull(sideEffectHandler)
             checkNotNull(render)
-            checkNotNull(coroutineScope)
 
             return Kinda(
                 initialState = initialState!!,
-                coroutineScope = coroutineScope!!,
                 reducer = reducer!!,
                 render = render!!,
-                sideEffectHandler = sideEffectHandler!!
+                sideEffectHandler = sideEffectHandler,
+                coroutineScope = coroutineScope ?: GlobalScope
             )
         }
     }

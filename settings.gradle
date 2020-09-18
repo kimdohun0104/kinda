@@ -1,3 +1,5 @@
+include ':example-android'
+include ':kinda-android'
 include ':kinda-core'
 rootProject.name='KindaMVI'
 include ':sample'
