@@ -1,11 +1,13 @@
 package dohun.kim.kinda.example_android
 
+import dohun.kim.kinda.kinda_core.Event
 import dohun.kim.kinda.kinda_core.KindaEvent
 import dohun.kim.kinda.kinda_core.KindaSideEffect
 import dohun.kim.kinda.kinda_core.KindaState
 
 data class CountState(
-    val count: Int = 0
+    val count: Int = 0,
+    val toastEvent: Event<String> = Event()
 ) : KindaState
 
 sealed class CountEvent : KindaEvent {

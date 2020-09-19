@@ -6,6 +6,4 @@ class CountViewModel : KindaViewModel<CountState, CountEvent, CountSideEffect>(
     initialState = CountState(),
     reducer = CountReducer(),
     sideEffectHandler = CountSideEffectHandler()
-) {
-
-}
+)
