@@ -6,4 +6,6 @@
 
     <color name="colorBlueA700">#2962FF</color>
     <color name="colorBlueA200">#448AFF</color>
+
+    <color name="colorGray500">#9E9E9E</color>
 </resources>

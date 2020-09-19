@@ -1,8 +1,9 @@
-package dohun.kim.kinda.example_android
+package dohun.kim.kinda.example_android.count
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import dohun.kim.kinda.example_android.R
 import dohun.kim.kinda.kinda_android.KindaActivity
 import dohun.kim.kinda.kinda_android.KindaViewModel
 import kotlinx.android.synthetic.main.activity_count.*

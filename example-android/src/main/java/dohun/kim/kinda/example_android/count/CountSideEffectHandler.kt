@@ -1,4 +1,4 @@
-package dohun.kim.kinda.example_android
+package dohun.kim.kinda.example_android.count
 
 import dohun.kim.kinda.kinda_core.KindaSideEffectHandler
 import kotlinx.coroutines.delay

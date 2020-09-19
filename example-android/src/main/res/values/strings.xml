@@ -4,4 +4,7 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="increase_after_second">Increase 1000 after 1 second</string>
+    <string name="login">Login</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
 </resources>
