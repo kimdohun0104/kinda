@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Example-Android</string>
+    <string name="count">count</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="increase_after_second">Increase 1000 after 1 second</string>
+</resources>

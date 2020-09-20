@@ -12,9 +12,9 @@ object Deps {
     }
 
     object Kotlin {
-        const val version = "1.3.61"
+        const val version = "1.3.72"
         private const val coroutineVersion = "1.3.5"
-        const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
+        const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
         const val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
     }
@@ -37,5 +37,9 @@ object Deps {
     object Retrofit {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.8.1"
         const val gson = "com.squareup.retrofit2:converter-gson:2.8.1"
+    }
+
+    object Test {
+        const val junit = "junit:junit:4.13"
     }
 }

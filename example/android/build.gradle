@@ -1,19 +1,21 @@
 import dependencies.Deps
 import dependencies.Versions
 
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion Versions.compileSdkVersion
 
     defaultConfig {
+        applicationId "dohun.kim.kinda.example_android"
         minSdkVersion Versions.minSdkVersion
         targetSdkVersion Versions.targetSdkVersion
         versionCode Versions.versionCode
         versionName Versions.versionName
 
-        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -25,11 +27,15 @@ android {
 }
 
 dependencies {
-    api project(path: ":kinda-core")
+    implementation project(path: ':kinda-core')
+    implementation project(path: ':kinda-android')
+
 
     implementation Deps.Kotlin.kotlin
+    implementation Deps.Kotlin.coroutine
 
     implementation Deps.AndroidX.appCompat
+    implementation Deps.AndroidX.constraintLayout
 
-    implementation Deps.AndroidX.Lifecycle.viewModelKtx
+    implementation Deps.material
 }

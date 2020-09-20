@@ -4,6 +4,8 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
+    api project(path: ':kinda-core')
+
     implementation Deps.Kotlin.kotlin
     implementation Deps.Kotlin.coroutine
 

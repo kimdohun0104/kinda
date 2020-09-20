@@ -11,11 +11,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/example-android" />
-            <option value="$PROJECT_DIR$/kinda" />
+            <option value="$PROJECT_DIR$/example" />
+            <option value="$PROJECT_DIR$/example/android" />
+            <option value="$PROJECT_DIR$/example/androidwithdsl" />
             <option value="$PROJECT_DIR$/kinda-android" />
             <option value="$PROJECT_DIR$/kinda-core" />
-            <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/kinda-dsl" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
