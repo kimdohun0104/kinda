@@ -1,3 +1,4 @@
+include ':kinda-dsl'
 include ':example-android'
 include ':kinda-android'
 include ':kinda-core'

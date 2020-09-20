@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/kinda" />
             <option value="$PROJECT_DIR$/kinda-android" />
             <option value="$PROJECT_DIR$/kinda-core" />
+            <option value="$PROJECT_DIR$/kinda-dsl" />
             <option value="$PROJECT_DIR$/sample" />
           </set>
         </option>
