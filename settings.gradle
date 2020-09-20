@@ -1,7 +1,5 @@
-include ':kinda-dsl'
 include ':example-android'
+include ':kinda-dsl'
 include ':kinda-android'
 include ':kinda-core'
 rootProject.name='KindaMVI'
-include ':sample'
-include ':kinda'

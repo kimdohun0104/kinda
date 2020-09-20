@@ -1,17 +1,18 @@
+import dependencies.Deps
+import dependencies.Versions
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion Versions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -24,11 +25,11 @@ android {
 }
 
 dependencies {
-    implementation project(path: ":kinda-core")
+    api project(path: ":kinda-core")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation Deps.Kotlin.kotlin
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation Deps.AndroidX.appCompat
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 }
