@@ -1,4 +1,4 @@
-package dohun.kim.kinda.kinda_android_dsl
+package dohun.kim.kinda.kinda_dsl
 
 import dohun.kim.kinda.kinda_core.*
 import kotlinx.coroutines.CoroutineScope
@@ -9,19 +9,21 @@ class KindaDslBuilder<S : KindaState, E : KindaEvent, SE : KindaSideEffect>(
     private val render: (S) -> Unit
 ) {
 
-    val reduceMap = HashMap<Class<E>, S.(E) -> Next<S, SE>>()
-    val sideEffectHandleMap = HashMap<Class<SE>, suspend S.() -> E>()
+    val reduceMap = HashMap<E, S.(E) -> Next<S, SE>>()
+    val sideEffectHandleMap = HashMap<SE, suspend S.() -> E>()
 
-    inline fun <reified EVENT : E> whenEvent(
-        noinline next: S.(EVENT) -> Next<S, SE>
+    fun whenEvent(
+        event: E,
+        next: S.(E) -> Next<S, SE>
     ) {
-        reduceMap[EVENT::class.java as Class<E>] = next as S.(E) -> Next<S, SE>
+        reduceMap[event] = next
     }
 
-    inline fun <reified SIDE_EFFECT : SE> whenSideEffect(
-        noinline next: suspend S.() -> E
+    fun whenSideEffect(
+        sideEffect: SE,
+        next: suspend S.() -> E
     ) {
-        sideEffectHandleMap[SIDE_EFFECT::class.java as Class<SE>] = next
+        sideEffectHandleMap[sideEffect] = next
     }
 
     fun next(state: S, sideEffect: SE? = null) = Next(state, sideEffect)
@@ -38,21 +40,21 @@ class KindaDslBuilder<S : KindaState, E : KindaEvent, SE : KindaSideEffect>(
             .reducer(object : KindaReducer<S, E, SE> {
                 override fun reduce(state: S, event: E): Next<S, SE> {
                     reduceMap.keys.forEach { key ->
-                        if (key.isInstance(state)) {
+                        if (key::class.isInstance(state)) {
                             return reduceMap[key]!!.invoke(state, event)
                         }
                     }
-                    throw IllegalStateException("Event not handled")
+                    throw IllegalStateException("Event not handled ${event::class}")
                 }
             })
             .sideEffectHandler(object : KindaSideEffectHandler<S, E, SE> {
                 override suspend fun handle(state: S, sideEffect: SE): E {
                     sideEffectHandleMap.keys.forEach { key ->
-                        if (key.isInstance(sideEffect)) {
+                        if (key::class.isInstance(sideEffect)) {
                             return sideEffectHandleMap[key]!!.invoke(state)
                         }
                     }
-                    throw IllegalStateException("SideEffect not handled")
+                    throw IllegalStateException("SideEffect not handled ${sideEffect::class}")
                 }
             })
             .build()

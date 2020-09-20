@@ -1,0 +1,39 @@
+import dependencies.Deps
+import dependencies.Versions
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+
+    defaultConfig {
+        applicationId "dohun.kim.kinda.androidwithdsl"
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':kinda-core')
+    implementation project(path: ':kinda-dsl')
+    implementation project(path: ':kinda-android')
+
+    implementation Deps.Kotlin.kotlin
+    implementation Deps.Kotlin.coroutine
+
+    implementation Deps.AndroidX.appCompat
+    implementation Deps.AndroidX.constraintLayout
+}

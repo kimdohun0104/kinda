@@ -10,10 +10,11 @@ class CountReducer : KindaReducer<CountState, CountEvent, CountSideEffect> {
             CountEvent.AttemptMagic -> Next(null, CountSideEffect.Magic)
             CountEvent.Increase -> Next(state.copy(count = state.count + 1))
             CountEvent.Decrease -> Next(state.copy(count = state.count - 1))
-            CountEvent.Increase1000 -> Next(state.copy(
-                count = state.count + 1000,
-                toastEvent = Event("Increase 1000, It's magic!")
-            )
+            CountEvent.Increase1000 -> Next(
+                state.copy(
+                    count = state.count + 1000,
+                    toastEvent = Event("Increase 1000, It's magic!")
+                )
             )
         }
     }
