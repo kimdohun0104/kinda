@@ -22,6 +22,18 @@ Kinda가 존재할 수 있었던 이유는 수 많은 오픈소스와 자료들 
 | [MyRealTrip](https://www.myrealtrip.com/) | [box](https://github.com/myrealtrip/box) | |
 ---
 
+### Download [![](https://jitpack.io/v/kimdohun0104/kinda-mvi.svg)](https://jitpack.io/#kimdohun0104/kinda-mvi)
+```
+com.github.kimdohun0104.kinda-mvi:kinda-core:1.0.0
+com.github.kimdohun0104.kinda-mvi:kinda-dsl:1.0.0
+com.github.kimdohun0104.kinda-mvi:kinda-android:1.0.0
+
+minsdk: 16
+targetsdk: 30
+```
+
+---
+
 ### License
 ```
 Copyright 2020 kimdohun0104
