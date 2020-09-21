@@ -24,12 +24,18 @@ Kinda가 존재할 수 있었던 이유는 수 많은 오픈소스와 자료들 
 
 ### Download [![](https://jitpack.io/v/kimdohun0104/kinda-mvi.svg)](https://jitpack.io/#kimdohun0104/kinda-mvi)
 ```
-com.github.kimdohun0104.kinda-mvi:kinda-core:1.0.0
-com.github.kimdohun0104.kinda-mvi:kinda-dsl:1.0.0
-com.github.kimdohun0104.kinda-mvi:kinda-android:1.0.0
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 
-minsdk: 16
-targetsdk: 30
+dependencies {
+    implementation "com.github.kimdohun0104.kinda-mvi:kinda-core:${kinda_version}"
+    implementation "com.github.kimdohun0104.kinda-mvi:kinda-dsl:${kinda_version}"
+    implementation "com.github.kimdohun0104.kinda-mvi:kinda-android:${kinda_version}"
+}
 ```
 
 ---
