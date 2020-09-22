@@ -1,5 +1,6 @@
 package dohun.kim.kinda.kinda_core
 
+import dohun.kim.kinda.kinda_core.interceptor.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -10,12 +11,15 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
     private val reducer: KindaReducer<S, E, SE>,
     private val sideEffectHandler: KindaSideEffectHandler<S, E, SE>?,
     private val render: (state: S) -> Unit,
-    private val coroutineScope: CoroutineScope
+    private val coroutineScope: CoroutineScope,
+    private val interceptors: Set<Interceptor<S, E, SE>>
 ) {
     private var state: S = initialState
 
     fun intent(event: E) {
+        interceptors.invokeBeforeReduce(state, event)
         val next = reducer.reduce(state, event)
+        interceptors.invokeAfterReduce(next.state, event)
 
         next.state?.let { state ->
             this.state = state
@@ -24,7 +28,9 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
 
         next.sideEffect?.let { sideEffect ->
             coroutineScope.launch(Dispatchers.IO) {
+                interceptors.invokeBeforeHandleSideEffect(state, sideEffect)
                 sideEffectHandler?.handle(state, sideEffect)?.let { sideEffectResult ->
+                    interceptors.invokeAfterHandleSideEffect(state, sideEffectResult, sideEffect)
                     intent(sideEffectResult)
                 }
             }
@@ -36,7 +42,8 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         private var reducer: KindaReducer<S, E, SE>? = null,
         private var sideEffectHandler: KindaSideEffectHandler<S, E, SE>? = null,
         private var render: ((state: S) -> Unit)? = null,
-        private var coroutineScope: CoroutineScope? = null
+        private var coroutineScope: CoroutineScope? = null,
+        private var interceptors: HashSet<Interceptor<S, E, SE>> = HashSet()
     ) {
         fun initialState(initialState: S) =
             apply { this.initialState = initialState }
@@ -53,6 +60,15 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         fun coroutineScope(coroutineScope: CoroutineScope) =
             apply { this.coroutineScope = coroutineScope }
 
+        fun addInterceptor(interceptor: Interceptor<S, E, SE>) =
+            apply { this.interceptors.add(interceptor) }
+
+        fun removeInterceptor(interceptor: Interceptor<S, E, SE>) =
+            apply { this.interceptors.remove(interceptor) }
+
+        fun addInterceptors(interceptors: Set<Interceptor<S, E, SE>>) =
+            apply { this.interceptors.addAll(interceptors) }
+
         fun build(): Kinda<S, E, SE> {
             checkNotNull(initialState)
             checkNotNull(reducer)
@@ -63,7 +79,8 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
                 reducer = reducer!!,
                 render = render!!,
                 sideEffectHandler = sideEffectHandler,
-                coroutineScope = coroutineScope ?: GlobalScope
+                coroutineScope = coroutineScope ?: GlobalScope,
+                interceptors = interceptors
             )
         }
     }
