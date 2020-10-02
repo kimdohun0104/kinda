@@ -30,7 +30,6 @@ dependencies {
     implementation project(path: ':kinda-core')
     implementation project(path: ':kinda-android')
 
-
     implementation Deps.Kotlin.kotlin
     implementation Deps.Kotlin.coroutine
 

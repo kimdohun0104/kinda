@@ -1,3 +1,4 @@
+include ':kinda-android-test'
 include ':example:androidwithdsl'
 include ':example:android'
 include ':kinda-dsl'

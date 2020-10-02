@@ -1,21 +1,22 @@
 import dependencies.Deps
 import dependencies.Versions
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.kimdohun0104.kinda'
 
 android {
     compileSdkVersion Versions.compileSdkVersion
 
     defaultConfig {
-        applicationId "dohun.kim.kinda.androidwithdsl"
         minSdkVersion Versions.minSdkVersion
         targetSdkVersion Versions.targetSdkVersion
         versionCode Versions.versionCode
         versionName Versions.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -28,15 +29,12 @@ android {
 
 dependencies {
     implementation project(path: ':kinda-core')
-    implementation project(path: ':kinda-dsl')
     implementation project(path: ':kinda-android')
 
     implementation Deps.Kotlin.kotlin
-    implementation Deps.Kotlin.coroutine
 
     implementation Deps.AndroidX.appCompat
-    implementation Deps.AndroidX.constraintLayout
 
-    testImplementation project(path: ':kinda-android-test')
-    testImplementation Deps.Test.junit4
+    implementation Deps.Test.junit4
+    implementation Deps.Test.coreTesting
 }

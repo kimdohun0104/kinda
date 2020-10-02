@@ -9,8 +9,6 @@ group='com.github.kimdohun0104.kinda'
 dependencies {
     implementation Deps.Kotlin.kotlin
     implementation Deps.Kotlin.coroutine
-
-    testImplementation Deps.Test.junit
 }
 
 sourceCompatibility = "1.7"

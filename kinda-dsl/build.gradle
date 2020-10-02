@@ -11,8 +11,6 @@ dependencies {
 
     implementation Deps.Kotlin.kotlin
     implementation Deps.Kotlin.coroutine
-
-    testImplementation Deps.Test.junit
 }
 
 sourceCompatibility = "1.7"

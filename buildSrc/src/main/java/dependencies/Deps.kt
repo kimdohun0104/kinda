@@ -40,6 +40,7 @@ object Deps {
     }
 
     object Test {
-        const val junit = "junit:junit:4.13"
+        const val junit4 = "junit:junit:4.13"
+        const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
     }
 }
