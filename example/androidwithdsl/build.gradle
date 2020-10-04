@@ -36,4 +36,7 @@ dependencies {
 
     implementation Deps.AndroidX.appCompat
     implementation Deps.AndroidX.constraintLayout
+
+    testImplementation project(path: ':kinda-android-test')
+    testImplementation Deps.Test.junit4
 }

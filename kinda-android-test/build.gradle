@@ -1,0 +1,41 @@
+import dependencies.Deps
+import dependencies.Versions
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.kimdohun0104.kinda'
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':kinda-core')
+    implementation project(path: ':kinda-android')
+
+    implementation Deps.Kotlin.kotlin
+
+    implementation Deps.AndroidX.appCompat
+
+    implementation Deps.Test.junit4
+    implementation Deps.Test.coreTesting
+    implementation Deps.Test.mockitoCore
+}
