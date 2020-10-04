@@ -37,4 +37,5 @@ dependencies {
 
     implementation Deps.Test.junit4
     implementation Deps.Test.coreTesting
+    implementation Deps.Test.mockitoCore
 }

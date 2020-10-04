@@ -7,6 +7,7 @@ import dohun.kim.kinda.kinda_core.KindaSideEffect
 import dohun.kim.kinda.kinda_core.KindaState
 import org.junit.Before
 import org.junit.Rule
+import org.mockito.MockitoAnnotations
 
 abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSideEffect> {
 
@@ -22,7 +23,8 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
     abstract fun buildViewModel(): KindaViewModel<S, E, SE>
 
     @Before
-    fun initViewModel() {
+    fun initKindaViewModelTest() {
+        MockitoAnnotations.openMocks(this)
         viewModel = buildViewModel()
     }
 
@@ -32,6 +34,7 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
 
     infix fun E.expectState(assertion: (S) -> Unit) {
         viewModel.intent(this)
+        Thread.sleep(50) // Waiting for the side effect result
         assertion.invoke(currentState)
     }
 
@@ -39,6 +42,7 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
         this.forEach { event ->
             viewModel.intent(event)
         }
+        Thread.sleep(100) // Waiting for the side effect result
         assertion.invoke(currentState)
     }
 }

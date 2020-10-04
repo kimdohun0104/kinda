@@ -7,19 +7,19 @@ import dohun.kim.kinda.kinda_core.KindaState
 
 class SideEffectHandlerDslBuilder<S : KindaState, E : KindaEvent, SE : KindaSideEffect> {
 
-    val sideEffectHandleMap = HashMap<SE, suspend S.() -> E>()
+    val sideEffectHandleMap = HashMap<Class<SE>, suspend S.() -> E>()
 
-    fun whenSideEffect(
-        sideEffect: SE,
-        next: suspend S.() -> E
+    inline fun <reified SIDE_EFFECT : SE>whenSideEffect(
+        noinline next: suspend S.() -> E
     ) {
-        sideEffectHandleMap[sideEffect] = next
+        sideEffectHandleMap[SIDE_EFFECT::class.java as Class<SE>] = next
     }
 
     fun build() = object : KindaSideEffectHandler<S, E, SE> {
         override suspend fun handle(state: S, sideEffect: SE): E {
+            println("handle side Effect")
             sideEffectHandleMap.keys.forEach { key ->
-                if (key::class.isInstance(sideEffect)) {
+                if (key.isInstance(sideEffect)) {
                     return sideEffectHandleMap[key]!!.invoke(state)
                 }
             }

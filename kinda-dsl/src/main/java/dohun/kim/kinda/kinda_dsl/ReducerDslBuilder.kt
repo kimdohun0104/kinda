@@ -4,13 +4,12 @@ import dohun.kim.kinda.kinda_core.*
 
 class ReducerDslBuilder<S : KindaState, E : KindaEvent, SE : KindaSideEffect> {
 
-    val reduceMap = HashMap<E, S.(E) -> Next<S, SE>>()
+    val reduceMap = HashMap<Class<E>, S.(E) -> Next<S, SE>>()
 
-    fun whenEvent(
-        event: E,
-        next: S.(E) -> Next<S, SE>
+    inline fun <reified EVENT: E>whenEvent(
+        noinline next: S.(EVENT) -> Next<S, SE>
     ) {
-        reduceMap[event] = next
+        reduceMap[EVENT::class.java as Class<E>] = next as S.(E) -> Next<S, SE>
     }
 
     fun next(state: S, sideEffect: SE? = null) = Next(state, sideEffect)
@@ -22,7 +21,7 @@ class ReducerDslBuilder<S : KindaState, E : KindaEvent, SE : KindaSideEffect> {
     fun build() = object : KindaReducer<S, E, SE> {
         override fun reduce(state: S, event: E): Next<S, SE> {
             reduceMap.keys.forEach { key ->
-                if (key::class.isInstance(event)) {
+                if (key.isInstance(event)) {
                     return reduceMap[key]!!.invoke(state, event)
                 }
             }
