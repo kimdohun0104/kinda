@@ -20,6 +20,8 @@ class GithubActivity : KindaActivity<GithubState, GithubEvent, GithubSideEffect>
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_github)
 
+        viewModel.intent(GithubEvent.AttemptGetUsers)
+
         rv_user.adapter = userListAdapter
     }
 

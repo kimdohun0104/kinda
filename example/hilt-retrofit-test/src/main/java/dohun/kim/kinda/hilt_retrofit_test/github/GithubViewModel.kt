@@ -40,8 +40,4 @@ class GithubViewModel @ViewModelInject constructor(
         }
     },
     interceptors = setOf(LoggingInterceptor())
-) {
-    init {
-        intent(GithubEvent.AttemptGetUsers)
-    }
-}
+)
