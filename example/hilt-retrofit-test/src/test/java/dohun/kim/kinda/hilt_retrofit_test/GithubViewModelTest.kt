@@ -1,6 +1,7 @@
 package dohun.kim.kinda.hilt_retrofit_test
 
 import dohun.kim.kinda.hilt_retrofit_test.data.GithubRepository
+import dohun.kim.kinda.hilt_retrofit_test.data.exception.ForbiddenException
 import dohun.kim.kinda.hilt_retrofit_test.data.exception.InternalErrorException
 import dohun.kim.kinda.hilt_retrofit_test.github.GithubEvent
 import dohun.kim.kinda.hilt_retrofit_test.github.GithubSideEffect
@@ -41,6 +42,16 @@ class GithubViewModelTest : KindaViewModelTest<GithubState, GithubEvent, GithubS
 
         GithubEvent.AttemptGetUsers expectState {
             assertEquals("서버 문제가 발생했습니다.", it.toastEvent.peekData())
+        }
+    }
+
+    @Test
+    fun `AttemptGetUsers ThrowForbiddenException ShowErrorMessage`() = runBlocking {
+        `when`(githubRepository.getUsers())
+            .thenThrow(ForbiddenException())
+
+        GithubEvent.AttemptGetUsers expectState {
+            assertEquals("잠시 후 다시 시도해주세요.", it.toastEvent.peekData())
         }
     }
 
