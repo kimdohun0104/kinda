@@ -17,7 +17,6 @@ class SideEffectHandlerDslBuilder<S : KindaState, E : KindaEvent, SE : KindaSide
 
     fun build() = object : KindaSideEffectHandler<S, E, SE> {
         override suspend fun handle(state: S, sideEffect: SE): E {
-            println("handle side Effect")
             sideEffectHandleMap.keys.forEach { key ->
                 if (key.isInstance(sideEffect)) {
                     return sideEffectHandleMap[key]!!.invoke(state)
