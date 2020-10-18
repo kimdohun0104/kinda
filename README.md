@@ -1,7 +1,11 @@
 ### Kinda는 무엇인가요?
 Kinda는 프로그램의 **상태**를 **직관적**이고 **안전한** 방법으로 관리할 수 있는 기능을 제공하는 라이브러리입니다.  
 [Redux](https://redux.js.org/), FLUX, MVI 등 **단방향 아키텍처**에서 많은 영감을 받았으며, MVI 패턴에 가장 근접합니다.  
-MVI패턴에 대해 익숙하지 않다면, 저의 [개인 블로그](https://medium.com/@dikolight203/mvi-%ED%8C%A8%ED%84%B4%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0-%EC%9D%B4%EC%9C%A0%EC%99%80-%EB%B0%A9%EB%B2%95-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%ED%95%9C%EA%B3%84-767cc9973c98)를 참고할 수 있습니다.
+MVI패턴에 대해 익숙하지 않다면, 저의 [개인 블로그](https://medium.com/@dikolight203/mvi-%ED%8C%A8%ED%84%B4%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0-%EC%9D%B4%EC%9C%A0%EC%99%80-%EB%B0%A9%EB%B2%95-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%ED%95%9C%EA%B3%84-767cc9973c98)를 참고할 수 있습니다.  
+
+
+[Kinda와 함께 MVI 테스트 작성하기](https://medium.com/@kimdohun0104/kinda%EC%99%80-%ED%95%A8%EA%BB%98-mvi-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-7f589e50846c)  
+[MVI 패턴에 대한 고찰, 이유와 방법 그리고 한계](https://medium.com/@kimdohun0104/mvi-%ED%8C%A8%ED%84%B4%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0-%EC%9D%B4%EC%9C%A0%EC%99%80-%EB%B0%A9%EB%B2%95-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%ED%95%9C%EA%B3%84-767cc9973c98)
 
 ---
 
