@@ -17,7 +17,7 @@ Kinda가 존재할 수 있었던 이유는 수 많은 오픈소스와 자료들 
 | 작성자 | 오픈소스 | 발표, 자료 |
 |---|---|---|
 | [Spotify](https://www.spotify.com/kr-ko/why-not-available/) |  [Mobius](https://github.com/spotify/mobius) | [Mobius: A Loopy UI Architecture - Ahmed Nawara, Spotify](https://www.facebook.com/watch/?v=2025571921049235) |
-| [Airbnb](https://www.airbnb.co.kr/) | [MvRx](https://github.com/airbnb/MvRx) | |
+| [Airbnb](https://www.airbnb.co.kr/) | [MvRx](https://github.com/airbnb/MvRx) | [Better Android Testing at Airbnb](https://medium.com/airbnb-engineering/better-android-testing-at-airbnb-part-4-testing-viewmodels-550d929126c8) |
 | [Tinder](https://tinder.com/) |[StateMachine](https://github.com/Tinder/StateMachine) | |
 | [MyRealTrip](https://www.myrealtrip.com/) | [box](https://github.com/myrealtrip/box) | |
 ---
