@@ -29,7 +29,7 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         next.sideEffect?.let { sideEffect ->
             coroutineScope.launch(Dispatchers.IO) {
                 interceptors.invokeBeforeHandleSideEffect(state, sideEffect)
-                sideEffectHandler?.handle(state, sideEffect)?.let { sideEffectResult ->
+                sideEffectHandler?.handle(sideEffect)?.let { sideEffectResult ->
                     interceptors.invokeAfterHandleSideEffect(state, sideEffectResult, sideEffect)
                     intent(sideEffectResult)
                 }

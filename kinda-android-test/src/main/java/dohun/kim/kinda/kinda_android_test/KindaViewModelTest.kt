@@ -19,7 +19,6 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
     val currentState: S
         get() = viewModel.stateLiveData.getOrAwaitValue()
 
-
     abstract fun buildViewModel(): KindaViewModel<S, E, SE>
 
     @Before

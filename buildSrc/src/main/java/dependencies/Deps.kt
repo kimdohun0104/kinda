@@ -13,7 +13,7 @@ object Deps {
     }
 
     object Kotlin {
-        const val version = "1.3.72"
+        const val version = "1.4.10"
         private const val coroutineVersion = "1.3.5"
         const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
