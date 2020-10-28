@@ -11,6 +11,7 @@
       <module name="KindaMVI.example.hilt-retrofit-test" target="11" />
       <module name="KindaMVI.kinda-android" target="11" />
       <module name="KindaMVI.kinda-android-test" target="11" />
+      <module name="KindaMVI.kinda-compose" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
