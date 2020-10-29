@@ -1,22 +1,21 @@
 import dependencies.Deps
-import dependencies.Versions
 
 plugins {
-    id 'com.android.library'
+    id 'com.android.application'
     id 'kotlin-android'
-    id 'com.github.dcendents.android-maven'
 }
 
-group='com.github.kimdohun0104.kinda'
-
 android {
-    compileSdkVersion Versions.compileSdkVersion
+    compileSdkVersion 30
 
     defaultConfig {
+        applicationId "dohun.kim.kinda"
         minSdkVersion 21
-        targetSdkVersion Versions.targetSdkVersion
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
 
-        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -43,11 +42,17 @@ android {
 }
 
 dependencies {
-    api project(path: ':kinda-core')
-    api project(path: ':kinda-android')
+    implementation project(path: ':kinda-compose')
+    implementation project(path: ':kinda-dsl')
+
+    implementation Deps.material
 
     implementation Deps.Kotlin.kotlin
 
+    implementation Deps.AndroidX.appCompat
+
     implementation Deps.AndroidX.Compose.ui
-    implementation Deps.AndroidX.Compose.liveData
+    implementation Deps.AndroidX.Compose.material
+    implementation Deps.AndroidX.Compose.tooling
+    implementation Deps.AndroidX.Compose.foundation
 }

@@ -14,6 +14,7 @@ buildscript {
         classpath Deps.Gradle.kotlinGradlePlugin
         classpath Deps.Gradle.androidMavenGradlePlugin
         classpath Deps.Gradle.hiltAndroidGradlePlugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
