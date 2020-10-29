@@ -1,0 +1,53 @@
+import dependencies.Deps
+import dependencies.Versions
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'com.github.dcendents.android-maven'
+}
+
+group='com.github.kimdohun0104.kinda'
+
+android {
+    compileSdkVersion Versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion Versions.targetSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerVersion Deps.Kotlin.version
+        kotlinCompilerExtensionVersion Deps.AndroidX.Compose.version
+    }
+}
+
+dependencies {
+    api project(path: ':kinda-core')
+    api project(path: ':kinda-android')
+
+    implementation Deps.Kotlin.kotlin
+
+    implementation Deps.AndroidX.Compose.ui
+    implementation Deps.AndroidX.Compose.liveData
+}

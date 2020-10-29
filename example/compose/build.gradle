@@ -1,0 +1,58 @@
+import dependencies.Deps
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "dohun.kim.kinda"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerVersion Deps.Kotlin.version
+        kotlinCompilerExtensionVersion Deps.AndroidX.Compose.version
+    }
+}
+
+dependencies {
+    implementation project(path: ':kinda-compose')
+    implementation project(path: ':kinda-dsl')
+
+    implementation Deps.material
+
+    implementation Deps.Kotlin.kotlin
+
+    implementation Deps.AndroidX.appCompat
+
+    implementation Deps.AndroidX.Compose.ui
+    implementation Deps.AndroidX.Compose.material
+    implementation Deps.AndroidX.Compose.tooling
+    implementation Deps.AndroidX.Compose.foundation
+}

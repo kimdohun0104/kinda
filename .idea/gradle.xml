@@ -14,15 +14,16 @@
             <option value="$PROJECT_DIR$/example" />
             <option value="$PROJECT_DIR$/example/android" />
             <option value="$PROJECT_DIR$/example/androidwithdsl" />
+            <option value="$PROJECT_DIR$/example/compose" />
             <option value="$PROJECT_DIR$/example/hilt-retrofit-test" />
             <option value="$PROJECT_DIR$/kinda-android" />
             <option value="$PROJECT_DIR$/kinda-android-test" />
+            <option value="$PROJECT_DIR$/kinda-compose" />
             <option value="$PROJECT_DIR$/kinda-core" />
             <option value="$PROJECT_DIR$/kinda-dsl" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>
