@@ -4,15 +4,14 @@ import androidx.compose.runtime.Composable
 import dohun.kim.kinda.kinda_android.KindaViewModel
 import dohun.kim.kinda.kinda_core.KindaState
 
-val KindaViewModelSet: HashSet<KindaViewModelStateMatcher<*>> = hashSetOf()
+val KindaViewModelSet: HashSet<KindaViewModel<*, *, *>> = hashSetOf()
 
 @Composable
 inline fun <reified S : KindaState, VM : KindaViewModel<S, *, *>> KindaViewModelProvider(
     viewModel: VM,
     child: @Composable () -> Unit
 ) {
-    val kindaViewModelStateMatcher = KindaViewModelStateMatcher(S::class.java, viewModel)
-    KindaViewModelSet.add(kindaViewModelStateMatcher)
+    KindaViewModelSet.add(viewModel)
     child()
-    KindaViewModelSet.remove(kindaViewModelStateMatcher)
+    KindaViewModelSet.remove(viewModel)
 }
