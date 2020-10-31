@@ -1,4 +1,4 @@
-package dohun.kim.kinda
+package dohun.kim.kinda.count
 
 import dohun.kim.kinda.kinda_core.KindaEvent
 import dohun.kim.kinda.kinda_core.KindaSideEffect
@@ -9,8 +9,13 @@ data class CountState(
 ) : KindaState
 
 sealed class CountEvent : KindaEvent {
+    object AttemptGetCount : CountEvent()
+
+    data class SetCount(val count: Int) : CountEvent()
+
     object Increase : CountEvent()
 }
 
 sealed class CountSideEffect : KindaSideEffect {
+    object GetCount : CountSideEffect()
 }

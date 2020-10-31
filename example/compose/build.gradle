@@ -55,4 +55,8 @@ dependencies {
     implementation Deps.AndroidX.Compose.material
     implementation Deps.AndroidX.Compose.tooling
     implementation Deps.AndroidX.Compose.foundation
+
+    def koin_version = '2.2.0-rc-3'
+//    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-compose:$koin_version"
 }

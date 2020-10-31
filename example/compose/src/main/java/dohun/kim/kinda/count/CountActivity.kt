@@ -1,21 +1,23 @@
-package dohun.kim.kinda
+package dohun.kim.kinda.count
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.viewinterop.viewModel
 import dohun.kim.kinda.kinda_compose.KindaConsumer
 import dohun.kim.kinda.kinda_compose.KindaViewModelProvider
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.dsl.module
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            KindaViewModelProvider(viewModel = viewModel(CountViewModel::class.java)) {
+            KindaViewModelProvider(viewModel = getViewModel<CountViewModel>()) {
 
                 Column {
                     KindaConsumer<CountState> { viewModel, state ->
@@ -32,4 +34,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
+
+val countModule = module {
+
+    factory<CountRepository> { DefaultCountRepository() }
+
+    viewModel { CountViewModel(get()) }
 }
