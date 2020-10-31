@@ -14,8 +14,9 @@ inline fun <reified S : KindaState> KindaConsumer(
     val viewModel = KindaViewModelSet.find {
         it.stateClass == S::class.java
     } as? KindaViewModel<S, KindaEvent, KindaSideEffect>
-        ?: throw IllegalStateException("[${S::class.java.simpleName}] 타입의 KindaViewModelProvider가 존재하지 않습니다")
+        ?: throw IllegalStateException("[${S::class.java.simpleName}] 타입의 KindaViewModelProvider가 존재하지 않습니다.")
 
     val state = viewModel.stateLiveData.observeAsState().value
-    child(viewModel, state!!)
+        ?: throw IllegalStateException("[${S::class.java.simpleName}]의 상태가 null입니다.")
+    child(viewModel, state)
 }

@@ -14,6 +14,7 @@ sealed class CountEvent : KindaEvent {
     data class SetCount(val count: Int) : CountEvent()
 
     object Increase : CountEvent()
+    object Decrease : CountEvent()
 }
 
 sealed class CountSideEffect : KindaSideEffect {

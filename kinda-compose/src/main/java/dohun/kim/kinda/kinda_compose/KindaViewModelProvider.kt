@@ -7,11 +7,21 @@ import dohun.kim.kinda.kinda_core.KindaState
 val KindaViewModelSet: HashSet<KindaViewModel<*, *, *>> = hashSetOf()
 
 @Composable
-inline fun <reified S : KindaState, VM : KindaViewModel<S, *, *>> KindaViewModelProvider(
-    viewModel: VM,
+inline fun KindaViewModelProvider(
+    viewModel: KindaViewModel<*, *, *>,
     child: @Composable () -> Unit
 ) {
     KindaViewModelSet.add(viewModel)
     child()
     KindaViewModelSet.remove(viewModel)
+}
+
+@Composable
+inline fun MultipleKindaViewModelProvider(
+    vararg viewModels: KindaViewModel<*, *, *>,
+    child: @Composable () -> Unit
+) {
+    KindaViewModelSet.addAll(viewModels)
+    child()
+    KindaViewModelSet.removeAll(viewModels)
 }

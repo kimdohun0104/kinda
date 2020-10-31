@@ -13,6 +13,10 @@ class CountViewModel(
             next(copy(count = count + 1))
         }
 
+        whenEvent<CountEvent.Decrease> {
+            next(copy(count = count - 1))
+        }
+
         whenEvent<CountEvent.AttemptGetCount> {
             dispatch(CountSideEffect.GetCount)
         }
