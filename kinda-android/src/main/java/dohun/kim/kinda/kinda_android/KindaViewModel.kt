@@ -8,11 +8,15 @@ import dohun.kim.kinda.kinda_core.*
 import dohun.kim.kinda.kinda_core.interceptor.Interceptor
 
 abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect>(
-    initialState: S,
-    reducer: KindaReducer<S, E, SE>,
-    sideEffectHandler: KindaSideEffectHandler<S, E, SE>,
+    private val initialState: S,
     interceptors: Set<Interceptor<S, E, SE>> = emptySet()
 ) : ViewModel() {
+
+    val stateClass: Class<out S>
+        get() = initialState::class.java
+
+    abstract val reducer: KindaReducer<S, E, SE>
+    abstract val sideEffectHandler: KindaSideEffectHandler<S, E, SE>
 
     private val kinda: Kinda<S, E, SE> = Kinda.Builder<S, E, SE>()
         .coroutineScope(viewModelScope)

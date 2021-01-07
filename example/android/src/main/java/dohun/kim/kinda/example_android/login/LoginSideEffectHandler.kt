@@ -4,7 +4,7 @@ import dohun.kim.kinda.kinda_core.KindaSideEffectHandler
 import kotlinx.coroutines.delay
 
 class LoginSideEffectHandler : KindaSideEffectHandler<LoginState, LoginEvent, LoginSideEffect> {
-    override suspend fun handle(state: LoginState, sideEffect: LoginSideEffect): LoginEvent {
+    override suspend fun handle(sideEffect: LoginSideEffect): LoginEvent {
         return when (sideEffect) {
             is LoginSideEffect.Login -> {
                 someLoginLogic()

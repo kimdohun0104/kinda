@@ -6,14 +6,14 @@ object Deps {
     const val lifecycleExt = "android.arch.lifecycle:extensions:1.1.1"
 
     object Gradle {
-        const val gradle = "com.android.tools.build:gradle:3.6.3"
+        const val gradle = "com.android.tools.build:gradle:4.2.0-alpha15"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
         const val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
         const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
     }
 
     object Kotlin {
-        const val version = "1.3.72"
+        const val version = "1.4.10"
         private const val coroutineVersion = "1.3.5"
         const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
@@ -35,6 +35,15 @@ object Deps {
             const val version = "1.0.0-alpha02"
             const val lifecycleViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:$version"
             const val compiler = "androidx.hilt:hilt-compiler:$version"
+        }
+
+        object Compose {
+             const val version = "1.0.0-alpha07"
+            const val ui = "androidx.compose.ui:ui:$version"
+            const val tooling = "androidx.ui:ui-tooling:$version"
+            const val foundation = "androidx.compose.foundation:foundation:$version"
+            const val material = "androidx.compose.material:material:$version"
+            const val liveData = "androidx.compose.runtime:runtime-livedata:$version"
         }
     }
 
