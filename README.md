@@ -39,7 +39,6 @@ dependencies {
     implementation "com.github.kimdohun0104.kinda:kinda-core:${kinda_version}"
     implementation "com.github.kimdohun0104.kinda:kinda-dsl:${kinda_version}"
     implementation "com.github.kimdohun0104.kinda:kinda-android:${kinda_version}"
-    implementation "com.github.kimdohun0104.kinda:kinda-compose:${kinda_version}"
     
     testImplementation "com.github.kimdohun0104.kinda:kinda-android-test:${kinda_version}"
 }
