@@ -31,10 +31,8 @@ class CountViewModelTest : KindaViewModelTest<CountState, CountEvent, CountSideE
     @Test
     fun `attemptMagic From0 Next1000`() {
         viewModel.intent(CountEvent.AttemptMagic)
-        Thread.sleep(1050)
-        expectState {
-            assertEquals(1000, it.count)
-        }
+        Thread.sleep(1010)
+        assertEquals(1000, currentState.count)
     }
 
     @Test

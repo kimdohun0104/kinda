@@ -28,11 +28,9 @@ dependencies {
     implementation project(path: ':kinda-core')
     implementation project(path: ':kinda-android')
 
-    implementation Deps.Kotlin.kotlin
+    implementation Deps.Kotlin.coroutine
 
-    implementation Deps.AndroidX.appCompat
+    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 
     implementation Deps.Test.junit4
-    implementation Deps.Test.coreTesting
-    implementation Deps.Test.mockitoCore
 }

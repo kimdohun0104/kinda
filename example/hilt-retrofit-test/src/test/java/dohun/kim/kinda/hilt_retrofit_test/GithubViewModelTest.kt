@@ -1,6 +1,5 @@
 package dohun.kim.kinda.hilt_retrofit_test
 
-import dohun.kim.kinda.hilt_retrofit_test.data.GithubRepository
 import dohun.kim.kinda.hilt_retrofit_test.data.exception.ForbiddenException
 import dohun.kim.kinda.hilt_retrofit_test.data.exception.InternalErrorException
 import dohun.kim.kinda.hilt_retrofit_test.github.GithubEvent
@@ -13,20 +12,19 @@ import dohun.kim.kinda.kinda_android_test.KindaViewModelTest
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
 
 class GithubViewModelTest : KindaViewModelTest<GithubState, GithubEvent, GithubSideEffect>() {
 
-    @Mock
-    private lateinit var githubRepository: GithubRepository
+    private lateinit var githubRepository: MockGithubRepository
 
-    override fun buildViewModel(): KindaViewModel<GithubState, GithubEvent, GithubSideEffect> =
-        GithubViewModel(githubRepository)
+    override fun buildViewModel(): KindaViewModel<GithubState, GithubEvent, GithubSideEffect> {
+        githubRepository = MockGithubRepository()
+        return GithubViewModel(githubRepository)
+    }
 
     @Test
     fun `AttemptGetUsers GettingUsersSucceed SetUsersState`() = runBlocking {
-        `when`(githubRepository.getUsers()).thenReturn(users)
+        githubRepository.setUsers(users)
 
         GithubEvent.AttemptGetUsers expectState {
             assertEquals(users, it.users)
@@ -37,8 +35,7 @@ class GithubViewModelTest : KindaViewModelTest<GithubState, GithubEvent, GithubS
 
     @Test
     fun `AttemptGetUsers ThrowInternalErrorException ShowErrorMessage`() = runBlocking {
-        `when`(githubRepository.getUsers())
-            .thenThrow(InternalErrorException())
+        githubRepository.setExceptionShouldThrown(InternalErrorException())
 
         GithubEvent.AttemptGetUsers expectState {
             assertEquals("서버 문제가 발생했습니다.", it.toastEvent.peekData())
@@ -47,8 +44,7 @@ class GithubViewModelTest : KindaViewModelTest<GithubState, GithubEvent, GithubS
 
     @Test
     fun `AttemptGetUsers ThrowForbiddenException ShowErrorMessage`() = runBlocking {
-        `when`(githubRepository.getUsers())
-            .thenThrow(ForbiddenException())
+        githubRepository.setExceptionShouldThrown(ForbiddenException())
 
         GithubEvent.AttemptGetUsers expectState {
             assertEquals("잠시 후 다시 시도해주세요.", it.toastEvent.peekData())

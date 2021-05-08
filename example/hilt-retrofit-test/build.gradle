@@ -63,5 +63,4 @@ dependencies {
 
     testImplementation project(path: ':kinda-android-test')
     testImplementation Deps.Test.junit4
-    testImplementation Deps.Test.mockitoCore
 }
