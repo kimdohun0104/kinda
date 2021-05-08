@@ -6,7 +6,7 @@ object Deps {
     const val lifecycleExt = "android.arch.lifecycle:extensions:1.1.1"
 
     object Gradle {
-        const val gradle = "com.android.tools.build:gradle:4.2.0-alpha15"
+        const val gradle = "com.android.tools.build:gradle:7.0.0-alpha15"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
         const val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
         const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
