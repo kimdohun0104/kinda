@@ -50,6 +50,7 @@ dependencies {
     implementation Deps.AndroidX.appCompat
     implementation Deps.AndroidX.constraintLayout
     implementation Deps.AndroidX.recyclerView
+    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 
     implementation Deps.AndroidX.Hilt.lifecycleViewModel
     kapt Deps.AndroidX.Hilt.compiler

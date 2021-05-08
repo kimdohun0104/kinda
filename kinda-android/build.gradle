@@ -27,9 +27,7 @@ android {
 dependencies {
     api project(path: ":kinda-core")
 
-    implementation Deps.Kotlin.kotlin
+    implementation Deps.Kotlin.coroutine
 
     implementation Deps.AndroidX.appCompat
-
-    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 }
