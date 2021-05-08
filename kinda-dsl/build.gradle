@@ -3,8 +3,6 @@ import dependencies.Deps
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
-group='com.github.kimdohun0104.kinda'
-
 dependencies {
     api project(path: ':kinda-core')
 

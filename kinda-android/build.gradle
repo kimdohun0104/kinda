@@ -4,8 +4,6 @@ import dependencies.Versions
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-group='com.github.kimdohun0104.kinda'
-
 android {
     compileSdkVersion Versions.compileSdkVersion
 
