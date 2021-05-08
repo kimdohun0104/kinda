@@ -4,9 +4,10 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
-    implementation Deps.Kotlin.kotlin
     implementation Deps.Kotlin.coroutine
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
