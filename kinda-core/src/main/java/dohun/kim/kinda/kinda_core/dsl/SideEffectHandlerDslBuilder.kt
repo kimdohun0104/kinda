@@ -1,4 +1,4 @@
-package dohun.kim.kinda.kinda_dsl
+package dohun.kim.kinda.kinda_core.dsl
 
 import dohun.kim.kinda.kinda_core.KindaEvent
 import dohun.kim.kinda.kinda_core.KindaSideEffect

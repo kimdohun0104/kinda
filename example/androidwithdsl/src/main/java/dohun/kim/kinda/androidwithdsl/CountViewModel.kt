@@ -3,8 +3,8 @@ package dohun.kim.kinda.androidwithdsl
 import dohun.kim.kinda.kinda_android.KindaViewModel
 import dohun.kim.kinda.kinda_core.KindaReducer
 import dohun.kim.kinda.kinda_core.KindaSideEffectHandler
-import dohun.kim.kinda.kinda_dsl.buildReducer
-import dohun.kim.kinda.kinda_dsl.buildSideEffectHandler
+import dohun.kim.kinda.kinda_core.dsl.buildReducer
+import dohun.kim.kinda.kinda_core.dsl.buildSideEffectHandler
 import kotlinx.coroutines.delay
 
 class CountViewModel : KindaViewModel<CountState, CountEvent, CountSideEffect>(

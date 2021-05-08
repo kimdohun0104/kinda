@@ -8,8 +8,8 @@ import dohun.kim.kinda.kinda_android.KindaViewModel
 import dohun.kim.kinda.kinda_core.Event
 import dohun.kim.kinda.kinda_core.KindaReducer
 import dohun.kim.kinda.kinda_core.KindaSideEffectHandler
-import dohun.kim.kinda.kinda_dsl.buildReducer
-import dohun.kim.kinda.kinda_dsl.buildSideEffectHandler
+import dohun.kim.kinda.kinda_core.dsl.buildReducer
+import dohun.kim.kinda.kinda_core.dsl.buildSideEffectHandler
 
 class GithubViewModel @ViewModelInject constructor(
     private val githubRepository: GithubRepository
