@@ -1,6 +1,5 @@
 package dohun.kim.kinda.kinda_core
 
-import dohun.kim.kinda.kinda_core.interceptor.*
 import dohun.kim.kinda.kinda_core.logging.kindaLogger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,19 +11,16 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
     private val reducer: KindaReducer<S, E, SE>,
     private val sideEffectHandler: KindaSideEffectHandler<S, E, SE>?,
     private val render: (state: S) -> Unit,
-    private val coroutineScope: CoroutineScope,
-    private val interceptors: Set<Interceptor<S, E, SE>>
+    private val coroutineScope: CoroutineScope
 ) {
     private var state: S = initialState
 
     fun intent(event: E) {
-        interceptors.invokeBeforeReduce(state, event)
         kindaLogger?.beforeReduce(state, event)
 
         val next = reducer.reduce(state, event)
 
         kindaLogger?.afterReduce(next.state)
-        interceptors.invokeAfterReduce(next.state, event)
 
         next.state?.let { state ->
             this.state = state
@@ -34,11 +30,9 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         next.sideEffect?.let { sideEffect ->
             coroutineScope.launch(Dispatchers.IO) {
 
-                interceptors.invokeBeforeHandleSideEffect(state, sideEffect)
                 kindaLogger?.beforeHandleSideEffect(sideEffect)
 
                 sideEffectHandler?.handle(sideEffect)?.let { sideEffectResult ->
-                    interceptors.invokeAfterHandleSideEffect(state, sideEffectResult, sideEffect)
                     kindaLogger?.afterHandleSideEffect(sideEffectResult, sideEffect)
 
                     intent(sideEffectResult)
@@ -53,7 +47,6 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         private var sideEffectHandler: KindaSideEffectHandler<S, E, SE>? = null,
         private var render: ((state: S) -> Unit)? = null,
         private var coroutineScope: CoroutineScope? = null,
-        private var interceptors: HashSet<Interceptor<S, E, SE>> = HashSet()
     ) {
         fun initialState(initialState: S) =
             apply { this.initialState = initialState }
@@ -70,18 +63,6 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         fun coroutineScope(coroutineScope: CoroutineScope) =
             apply { this.coroutineScope = coroutineScope }
 
-        @Deprecated("Interceptor deprecated since 1.3.0")
-        fun addInterceptor(interceptor: Interceptor<S, E, SE>) =
-            apply { this.interceptors.add(interceptor) }
-
-        @Deprecated("Interceptor deprecated since 1.3.0")
-        fun removeInterceptor(interceptor: Interceptor<S, E, SE>) =
-            apply { this.interceptors.remove(interceptor) }
-
-        @Deprecated("Interceptor deprecated since 1.3.0")
-        fun addInterceptors(interceptors: Set<Interceptor<S, E, SE>>) =
-            apply { this.interceptors.addAll(interceptors) }
-
         fun build(): Kinda<S, E, SE> {
             checkNotNull(initialState)
             checkNotNull(reducer)
@@ -93,7 +74,6 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
                 render = render!!,
                 sideEffectHandler = sideEffectHandler,
                 coroutineScope = coroutineScope ?: GlobalScope,
-                interceptors = interceptors
             )
         }
     }

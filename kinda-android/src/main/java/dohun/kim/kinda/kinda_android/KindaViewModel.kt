@@ -5,11 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dohun.kim.kinda.kinda_core.*
-import dohun.kim.kinda.kinda_core.interceptor.Interceptor
 
 abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect>(
-    private val initialState: S,
-    interceptors: Set<Interceptor<S, E, SE>> = emptySet()
+    private val initialState: S
 ) : ViewModel() {
 
     val stateClass: Class<out S>
@@ -24,7 +22,6 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
         .reducer(reducer)
         .sideEffectHandler(sideEffectHandler)
         .render { state -> _stateLiveData.postValue(state) }
-        .addInterceptors(interceptors)
         .build()
 
     private val _stateLiveData = MutableLiveData<S>().apply { value = kinda.initialState }
