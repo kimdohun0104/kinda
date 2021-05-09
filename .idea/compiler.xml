@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="1.8">
       <module name="example" target="1.7" />
       <module name="kinda-core" target="1.7" />
       <module name="kinda-dsl" target="1.7" />
-      <module name="KindaMVI.buildSrc" target="1.8" />
+      <module name="KindaMVI.buildSrc" target="11" />
       <module name="KindaMVI.compose" target="11" />
-      <module name="KindaMVI.example.android" target="1.8" />
-      <module name="KindaMVI.example.androidwithdsl" target="1.8" />
+      <module name="KindaMVI.example.android" target="11" />
+      <module name="KindaMVI.example.androidwithdsl" target="11" />
       <module name="KindaMVI.example.compose" target="11" />
-      <module name="KindaMVI.example.hilt-retrofit-test" target="1.8" />
-      <module name="KindaMVI.kinda-android" target="1.8" />
-      <module name="KindaMVI.kinda-android-test" target="1.8" />
+      <module name="KindaMVI.example.hilt-retrofit-test" target="11" />
+      <module name="KindaMVI.kinda-android" target="11" />
+      <module name="KindaMVI.kinda-android-test" target="11" />
       <module name="KindaMVI.kinda-compose" target="11" />
+      <module name="KindaMVI.kinda-dsl" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

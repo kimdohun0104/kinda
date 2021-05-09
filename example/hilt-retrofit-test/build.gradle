@@ -39,7 +39,6 @@ android {
 
 dependencies {
     implementation project(path: ':kinda-core')
-    implementation project(path: ':kinda-dsl')
     implementation project(path: ':kinda-android')
 
     implementation Deps.Glide.glide
@@ -50,6 +49,7 @@ dependencies {
     implementation Deps.AndroidX.appCompat
     implementation Deps.AndroidX.constraintLayout
     implementation Deps.AndroidX.recyclerView
+    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 
     implementation Deps.AndroidX.Hilt.lifecycleViewModel
     kapt Deps.AndroidX.Hilt.compiler
@@ -62,5 +62,4 @@ dependencies {
 
     testImplementation project(path: ':kinda-android-test')
     testImplementation Deps.Test.junit4
-    testImplementation Deps.Test.mockitoCore
 }

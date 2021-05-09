@@ -6,7 +6,7 @@ object Deps {
     const val lifecycleExt = "android.arch.lifecycle:extensions:1.1.1"
 
     object Gradle {
-        const val gradle = "com.android.tools.build:gradle:4.2.0-alpha15"
+        const val gradle = "com.android.tools.build:gradle:7.0.0-alpha15"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
         const val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
         const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
@@ -14,7 +14,7 @@ object Deps {
 
     object Kotlin {
         const val version = "1.4.10"
-        private const val coroutineVersion = "1.3.5"
+        const val coroutineVersion = "1.4.3"
         const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
         const val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
@@ -38,7 +38,7 @@ object Deps {
         }
 
         object Compose {
-             const val version = "1.0.0-alpha07"
+            const val version = "1.0.0-alpha07"
             const val ui = "androidx.compose.ui:ui:$version"
             const val tooling = "androidx.ui:ui-tooling:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -70,5 +70,6 @@ object Deps {
         const val junit4 = "junit:junit:4.13"
         const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
         const val mockitoCore = "org.mockito:mockito-core:3.5.13"
+        const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Kotlin.coroutineVersion}"
     }
 }

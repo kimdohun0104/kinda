@@ -28,7 +28,6 @@ android {
 
 dependencies {
     implementation project(path: ':kinda-core')
-    implementation project(path: ':kinda-dsl')
     implementation project(path: ':kinda-android')
 
     implementation Deps.Kotlin.kotlin
@@ -36,6 +35,7 @@ dependencies {
 
     implementation Deps.AndroidX.appCompat
     implementation Deps.AndroidX.constraintLayout
+    implementation Deps.AndroidX.Lifecycle.viewModelKtx
 
     testImplementation project(path: ':kinda-android-test')
     testImplementation Deps.Test.junit4

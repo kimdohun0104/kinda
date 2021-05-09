@@ -1,27 +1,23 @@
 import dependencies.Deps
 
 buildscript {
-    ext {
-        kotlin_version = '1.4.10'
-    }
     repositories {
         google()
-        jcenter()
-        maven { url "https://jitpack.io" }
+        mavenCentral()
     }
     dependencies {
         classpath Deps.Gradle.gradle
         classpath Deps.Gradle.kotlinGradlePlugin
-        classpath Deps.Gradle.androidMavenGradlePlugin
         classpath Deps.Gradle.hiltAndroidGradlePlugin
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath Deps.Gradle.androidMavenGradlePlugin
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
     }
 }
 

@@ -1,34 +1,40 @@
 package dohun.kim.kinda.kinda_android
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dohun.kim.kinda.kinda_core.*
-import dohun.kim.kinda.kinda_core.interceptor.Interceptor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffect>(
-    private val initialState: S,
-    interceptors: Set<Interceptor<S, E, SE>> = emptySet()
+    private val initialState: S
 ) : ViewModel() {
-
-    val stateClass: Class<out S>
-        get() = initialState::class.java
 
     abstract val reducer: KindaReducer<S, E, SE>
     abstract val sideEffectHandler: KindaSideEffectHandler<S, E, SE>
 
-    private val kinda: Kinda<S, E, SE> = Kinda.Builder<S, E, SE>()
-        .coroutineScope(viewModelScope)
-        .initialState(initialState)
-        .reducer(reducer)
-        .sideEffectHandler(sideEffectHandler)
-        .render { state -> _stateLiveData.postValue(state) }
-        .addInterceptors(interceptors)
-        .build()
+    private val kinda: Kinda<S, E, SE> by lazy {
+        Kinda.Builder<S, E, SE>()
+            .coroutineScope(kindaScope)
+            .initialState(initialState)
+            .reducer(reducer)
+            .sideEffectHandler(sideEffectHandler)
+            .render { state -> _state.value = state  }
+            .build()
+    }
 
-    private val _stateLiveData = MutableLiveData<S>().apply { value = kinda.initialState }
-    val stateLiveData: LiveData<S> = _stateLiveData
+    private val job = SupervisorJob()
+    protected val kindaScope = CoroutineScope(Dispatchers.Main + job)
+
+    private val _state = MutableStateFlow(initialState)
+    val state: StateFlow<S> = _state
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 
     fun intent(event: E) {
         kinda.intent(event)
