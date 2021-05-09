@@ -9,6 +9,7 @@ buildscript {
         classpath Deps.Gradle.gradle
         classpath Deps.Gradle.kotlinGradlePlugin
         classpath Deps.Gradle.hiltAndroidGradlePlugin
+        classpath Deps.Gradle.androidMavenGradlePlugin
     }
 }
 
