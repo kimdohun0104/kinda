@@ -15,9 +15,6 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
     abstract val reducer: KindaReducer<S, E, SE>
     abstract val sideEffectHandler: KindaSideEffectHandler<S, E, SE>
 
-    private val viewModelJob = SupervisorJob()
-    protected val kindaScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
     private val kinda: Kinda<S, E, SE> by lazy {
         Kinda.Builder<S, E, SE>()
             .coroutineScope(kindaScope)
@@ -28,12 +25,15 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
             .build()
     }
 
+    private val job = SupervisorJob()
+    protected val kindaScope = CoroutineScope(Dispatchers.Main + job)
+
     private val _state = MutableStateFlow(initialState)
     val state: StateFlow<S> = _state
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        job.cancel()
     }
 
     fun intent(event: E) {

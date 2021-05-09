@@ -11,8 +11,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffect>
-    : AppCompatActivity() {
+abstract class KindaActivity<S : KindaState, E : KindaEvent, SE : KindaSideEffect> : AppCompatActivity() {
 
     abstract val viewModel: KindaViewModel<S, E, SE>
 
