@@ -3,6 +3,9 @@ import dependencies.Versions
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
+
+group = 'com.github.kimdohun0104.kinda'
 
 android {
     compileSdkVersion Versions.compileSdkVersion

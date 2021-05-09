@@ -2,6 +2,9 @@ import dependencies.Deps
 
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+
+group = 'com.github.kimdohun0104.kinda'
 
 dependencies {
     implementation Deps.Kotlin.coroutine
