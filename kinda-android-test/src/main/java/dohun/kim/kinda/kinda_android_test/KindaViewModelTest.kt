@@ -9,6 +9,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 
+@SuppressLint("NewApi")
 abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSideEffect> {
 
     abstract fun buildViewModel(): KindaViewModel<S, E, SE>
@@ -29,13 +30,13 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
 
     infix fun E.expectState(assertion: (S) -> Unit) {
         viewModel.intent(this)
-        Thread.sleep(10)
+        viewModel.kinda.sideEffectPhaser.arriveAndAwaitAdvance()
         assertion(currentState)
     }
 
     infix fun Iterable<E>.expectState(assertion: (S) -> Unit) {
         this.forEach { event -> viewModel.intent(event) }
-        Thread.sleep(10)
+        viewModel.kinda.sideEffectPhaser.arriveAndAwaitAdvance()
         assertion.invoke(currentState)
     }
 }

@@ -16,11 +16,11 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
     abstract val sideEffectHandler: KindaSideEffectHandler<S, E, SE>
 
     private val viewModelJob = SupervisorJob()
-    protected val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    protected val kindaScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val kinda: Kinda<S, E, SE> by lazy {
+    val kinda: Kinda<S, E, SE> by lazy {
         Kinda.Builder<S, E, SE>()
-            .coroutineScope(viewModelScope)
+            .coroutineScope(kindaScope)
             .initialState(initialState)
             .reducer(reducer)
             .sideEffectHandler(sideEffectHandler)
