@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dohun.kim.kinda.hilt_retrofit_test.R
+import dohun.kim.kinda.hilt_retrofit_test.github.adapter.UserListAdapter
 import dohun.kim.kinda.kinda_android.KindaActivity
 import kotlinx.android.synthetic.main.activity_github.*
 

@@ -1,4 +1,4 @@
-package dohun.kim.kinda.hilt_retrofit_test.github
+package dohun.kim.kinda.hilt_retrofit_test.github.adapter
 
 import android.view.LayoutInflater
 import android.view.View
