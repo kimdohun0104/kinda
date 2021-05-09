@@ -18,7 +18,7 @@ abstract class KindaViewModel<S : KindaState, E : KindaEvent, SE : KindaSideEffe
     private val viewModelJob = SupervisorJob()
     protected val kindaScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val kinda: Kinda<S, E, SE> by lazy {
+    private val kinda: Kinda<S, E, SE> by lazy {
         Kinda.Builder<S, E, SE>()
             .coroutineScope(kindaScope)
             .initialState(initialState)

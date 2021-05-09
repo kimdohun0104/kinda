@@ -30,13 +30,11 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
 
     infix fun E.expectState(assertion: (S) -> Unit) {
         viewModel.intent(this)
-        viewModel.kinda.sideEffectPhaser.arriveAndAwaitAdvance()
         assertion(currentState)
     }
 
     infix fun Iterable<E>.expectState(assertion: (S) -> Unit) {
         this.forEach { event -> viewModel.intent(event) }
-        viewModel.kinda.sideEffectPhaser.arriveAndAwaitAdvance()
         assertion.invoke(currentState)
     }
 }

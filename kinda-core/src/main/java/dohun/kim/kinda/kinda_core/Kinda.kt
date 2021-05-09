@@ -15,8 +15,6 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
     private val render: (state: S) -> Unit,
     private val coroutineScope: CoroutineScope
 ) {
-    val sideEffectPhaser = Phaser()
-
     private var state: S = initialState
 
     fun intent(event: E) {
@@ -32,7 +30,6 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         }
 
         next.sideEffect?.let { sideEffect ->
-            sideEffectPhaser.register()
             coroutineScope.launch {
                 kindaLogger?.beforeHandleSideEffect(sideEffect)
 
@@ -40,8 +37,6 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
                     kindaLogger?.afterHandleSideEffect(sideEffectResult, sideEffect)
 
                     intent(sideEffectResult)
-
-                    sideEffectPhaser.arriveAndDeregister()
                 }
             }
         }
