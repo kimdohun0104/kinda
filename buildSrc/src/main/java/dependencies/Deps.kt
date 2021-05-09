@@ -14,7 +14,7 @@ object Deps {
 
     object Kotlin {
         const val version = "1.4.10"
-        private const val coroutineVersion = "1.4.3"
+        const val coroutineVersion = "1.4.3"
         const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
         const val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
@@ -38,7 +38,7 @@ object Deps {
         }
 
         object Compose {
-             const val version = "1.0.0-alpha07"
+            const val version = "1.0.0-alpha07"
             const val ui = "androidx.compose.ui:ui:$version"
             const val tooling = "androidx.ui:ui-tooling:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -70,5 +70,6 @@ object Deps {
         const val junit4 = "junit:junit:4.13"
         const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
         const val mockitoCore = "org.mockito:mockito-core:3.5.13"
+        const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Kotlin.coroutineVersion}"
     }
 }

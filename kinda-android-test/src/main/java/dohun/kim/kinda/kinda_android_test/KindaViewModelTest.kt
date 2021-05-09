@@ -1,10 +1,13 @@
 package dohun.kim.kinda.kinda_android_test
 
+import android.annotation.SuppressLint
 import dohun.kim.kinda.kinda_android.KindaViewModel
 import dohun.kim.kinda.kinda_core.KindaEvent
 import dohun.kim.kinda.kinda_core.KindaSideEffect
 import dohun.kim.kinda.kinda_core.KindaState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
+import org.junit.Rule
 
 abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSideEffect> {
 
@@ -14,6 +17,10 @@ abstract class KindaViewModelTest<S : KindaState, E : KindaEvent, SE : KindaSide
 
     protected val currentState: S
         get() = viewModel.state.value
+
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    val coroutineTestRule = CoroutineTestRule()
 
     @Before
     fun initKindaViewModelTest() {

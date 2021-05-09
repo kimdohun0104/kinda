@@ -9,6 +9,7 @@ import dohun.kim.kinda.hilt_retrofit_test.github.GithubViewModel
 import dohun.kim.kinda.hilt_retrofit_test.model.UserModel
 import dohun.kim.kinda.kinda_android.KindaViewModel
 import dohun.kim.kinda.kinda_android_test.KindaViewModelTest
+import dohun.kim.kinda.kinda_core.logging.KindaLoggerSetting
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test

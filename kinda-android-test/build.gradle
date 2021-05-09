@@ -33,4 +33,5 @@ dependencies {
     implementation Deps.AndroidX.Lifecycle.viewModelKtx
 
     implementation Deps.Test.junit4
+    implementation Deps.Test.coroutine
 }

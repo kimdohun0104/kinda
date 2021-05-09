@@ -28,8 +28,7 @@ class Kinda<S : KindaState, E : KindaEvent, SE : KindaSideEffect> private constr
         }
 
         next.sideEffect?.let { sideEffect ->
-            coroutineScope.launch(Dispatchers.IO) {
-
+            coroutineScope.launch {
                 kindaLogger?.beforeHandleSideEffect(sideEffect)
 
                 sideEffectHandler?.handle(sideEffect)?.let { sideEffectResult ->
