@@ -1,0 +1,15 @@
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = "com.github.kimdohun0104.kinda"
+
+                artifactId = releaseArtifactId
+                version = releaseVersion
+            }
+        }
+    }
+}
