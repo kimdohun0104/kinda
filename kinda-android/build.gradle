@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android'
 apply from: rootProject.file('gradle/publish.gradle')
 
 ext {
-    releaseVersion = Versions.versionName
     releaseArtifactId = "kinda-android"
 }
 

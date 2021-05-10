@@ -8,7 +8,6 @@ afterEvaluate {
                 groupId = "com.github.kimdohun0104.kinda"
 
                 artifactId = releaseArtifactId
-                version = releaseVersion
             }
         }
     }
