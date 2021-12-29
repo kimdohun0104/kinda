@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/kinda-android" />
             <option value="$PROJECT_DIR$/kinda-android-test" />
             <option value="$PROJECT_DIR$/kinda-core" />
+            <option value="$PROJECT_DIR$/kinda-core-before" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

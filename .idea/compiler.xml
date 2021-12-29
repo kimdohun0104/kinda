@@ -14,6 +14,7 @@
       <module name="KindaMVI.kinda-android" target="11" />
       <module name="KindaMVI.kinda-android-test" target="11" />
       <module name="KindaMVI.kinda-compose" target="11" />
+      <module name="KindaMVI.kinda-core" target="11" />
       <module name="KindaMVI.kinda-dsl" target="1.8" />
     </bytecodeTargetLevel>
   </component>
