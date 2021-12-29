@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    api project(path: ':kinda-core-before')
+    api project(path: ':kinda-core')
     implementation Deps.Kotlin.coroutine
 
     implementation Deps.AndroidX.appCompat

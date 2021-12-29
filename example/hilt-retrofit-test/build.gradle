@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':kinda-core-before')
+    implementation project(path: ':kinda-core')
     implementation project(path: ':kinda-android')
 
     implementation Deps.Glide.glide
